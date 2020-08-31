@@ -12,7 +12,7 @@ import Users from './components/Users/Users';
 import { rootStateType,  storeType,dispatchActionType } from './redux/ReduxStore';
 
 export type  appType={
-  state:rootStateType
+  // state:rootStateType
   // addChangePost:() => void
   // sendMessage:() =>  void
   // changeNewPostText:( newText:string) => void
@@ -21,21 +21,21 @@ export type  appType={
   dispatch:(action:dispatchActionType)=>void
 }
 function App(props:appType) {
-  
+
   return (
       <div className='app-wrapper'>
         <Header/>
         <Navbar/>
         <div  className = 'wrappContent'>
               <Route path={"/dialogs"} render={ () => <Dialogs 
-                                                        dialogs ={props.state.dialogs} 
-                                                        message={props.state.dialogs.messageForNewDialog}
+                                                        // dialogs ={finalStore}
+                                                        // message={props.store.dialogs.messageForNewDialog}
                                                         dispatch={props.store.dispatch.bind(props.store)}
                                                         // sendMessage={props.sendMessage}
                                                         // changeNewMessage={props.changeNewMessage}
                                                         /> } />
               <Route path={"/profile"} render={() => <Profile 
-                                                        profile ={props.state.profile}
+                                                        // profile ={props.store.profile}
                                                         dispatch={props.store.dispatch.bind(props.store)}
                                                         // dispatch={props.dispatch}
                                                         // addChangePost={props.addChangePost} 

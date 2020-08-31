@@ -1,24 +1,27 @@
 import {combineReducers, createStore} from "redux";
-import dialogReducer, {changeMessageActionCreator, SendMessageActionCreator} from "./DilogReducer";
-import profileReducer from "./ProfileReducer";
+import dialogReducer, {changeMessageActionCreator, SendMessageActionCreator} from "./DialogReducer";
+import profileReducer, {AddChangePostActionCreator, OnPostChangeActionCreator} from "./ProfileReducer";
 
-export type addChangePostAction={
-    type:'ADD-CHANGE-POST'
-}
-export type changeNewPostTextAction={
-    type:'CHANGE-NEW-POST-TEXT'
-    newText: string
-}
+// export type AddChangePostActionType={
+//     type:'ADD-CHANGE-POST'
+// }
+export type AddChangePostActionType=ReturnType<typeof AddChangePostActionCreator>
+// export type ChangeNewPostTextActionType={
+//     type:'CHANGE-NEW-POST-TEXT'
+//     newText: string
+// }
+export type ChangeNewPostTextActionType=ReturnType<typeof OnPostChangeActionCreator>
 // export type sendMessageAction={
 //     type:'SEND-MESSAGE'
 // }
-export type sendMessageAction = ReturnType<typeof SendMessageActionCreator>
+export type SendMessageActionType = ReturnType<typeof SendMessageActionCreator>
 // export type changeNewMessageAction={
 //     type:'CHANGE-NEW-MESSAGE'
 //     newText: string
 // }
-export type changeNewMessageAction= ReturnType<typeof changeMessageActionCreator>
-export type dispatchActionType=changeNewPostTextAction|sendMessageAction|changeNewMessageAction|addChangePostAction;
+export type ChangeNewMessageActionType= ReturnType<typeof changeMessageActionCreator>
+
+export type dispatchActionType=ChangeNewPostTextActionType|SendMessageActionType|ChangeNewMessageActionType|AddChangePostActionType;
 export type storeType={
     _state: rootStateType
     getState: ()=> rootStateType
@@ -41,11 +44,11 @@ export type profileType = {
 }
 export type messagesItemType = {
     message: string
-    id : number | string
+    id : number
 }
 export type dialogsItemType = {
     name: string
-    id : number | string
+    id : number
 }
 export type postType = {
     message: string

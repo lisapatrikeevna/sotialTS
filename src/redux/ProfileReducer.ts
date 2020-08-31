@@ -32,6 +32,6 @@ const profileReducer = ( state=initialState, action:dispatchActionType) => {
 
 
 }
-export const addChangePostActionCreator = () => ({ type: ADD_CHANGE_POST})
-export const onPostChangeActionCreator = (message:string) => ({type:CHANGE_NEW_POST_TEXT,newText:message })
+export const AddChangePostActionCreator = () => ({ type: ADD_CHANGE_POST} as const)
+export const OnPostChangeActionCreator = (message:string) => ({type:CHANGE_NEW_POST_TEXT,newText:message })
 export default profileReducer;
