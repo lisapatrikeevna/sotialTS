@@ -1,14 +1,21 @@
-import {dispatchActionType} from "./ReduxStore";
-
+type SendMessageActionType = ReturnType<typeof SendMessageActionCreator>
+type ChangeNewMessageActionType = ReturnType<typeof changeMessageActionCreator>
+type dialogsActionType = SendMessageActionType| ChangeNewMessageActionType;
 type messagesItemType = {
     message: string
     id : number
 }
-type dialogsItemType = {
+export type dialogsItemType = {
     name: string
     id : number
 }
-let initialState={
+export type dialogsInitialStateType = {
+    dialogItem:Array<dialogsItemType>
+    messageData: Array<messagesItemType>
+    messageForNewDialog:string
+}
+
+let initialState:dialogsInitialStateType={
     dialogItem: [
         {name: "lisa", id: 1},
         {name: "Dan" , id: 2 },
@@ -23,25 +30,32 @@ let initialState={
 }
 const SEND_MESSAGE = "SEND-MESSAGE";
 const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
-
-const dialogReducer = ( state=initialState, action:dispatchActionType) => {
+const dialogReducer = ( state=initialState, action:dialogsActionType) => {
    switch (action.type) {
        case SEND_MESSAGE:
            const newText: messagesItemType = {
                id: new Date().getTime(),
                message: state.messageForNewDialog
            }
-           state.messageForNewDialog='';
-           state.messageData.push(newText)
-           return state;
+           return {
+               ...state,
+               messageForNewDialog : '',
+               messageData: [...state.messageData,newText]
+           }
+
        case CHANGE_NEW_MESSAGE:
-               state.messageForNewDialog = action.newText;
-               return state;
+           // debugger
+           return {
+               ...state,
+               messageForNewDialog : action.newText,
+           }
+
        default  :
            return state;
    }
 
 }
 export const SendMessageActionCreator = () => ({type:SEND_MESSAGE} as const)
-export const changeMessageActionCreator = (message:string) => ({type:CHANGE_NEW_MESSAGE,messageText:message }as const)
+export const changeMessageActionCreator = (message:string) => ({type:CHANGE_NEW_MESSAGE,newText:message }as const)
+
 export default dialogReducer;
