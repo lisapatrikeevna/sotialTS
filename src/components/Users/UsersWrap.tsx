@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dispatch} from "redux";
-import Users from "./Users";
+import Users from "./UsersClass";
 import {connect} from "react-redux";
 import {
     followActionCreator,
