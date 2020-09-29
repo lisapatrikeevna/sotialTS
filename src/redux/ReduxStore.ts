@@ -9,7 +9,7 @@ export type RootStateType = ReturnType<typeof reducers>
 let reducers = combineReducers({
     profile: profileReducer,
     dialogs: dialogReducer,
-    users: usersReducer
+    users: usersReducer,
 });
 
 let store = createStore(reducers);
