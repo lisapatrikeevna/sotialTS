@@ -61,6 +61,7 @@ export const Users = (props: propsType) => {
                                     <div>{u.name}</div>
                                     <div>{u.status}</div>
                                 </span>
+
                                 <span>
                                     <div>{"city"}</div>
                                     <div>{"country"}</div>
