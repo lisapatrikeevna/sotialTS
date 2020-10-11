@@ -1,0 +1,26 @@
+.menu{
+    grid-area: menu;
+    padding-right: 40px;
+    /* margin-right: 10px; */
+    background: #a054c9;
+}
+.menu__item{
+    display: flex;
+    line-height: 70px;
+    padding: 5px 0;
+}
+.menu__item>a{
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    line-height: 31px;
+    text-decoration: none;
+    padding-left: 5px;
+}
+.menu__item img{
+    width: 60px;
+}
+.menu__item a.active{
+    color: #69268d;
+    text-decoration: none;
+}

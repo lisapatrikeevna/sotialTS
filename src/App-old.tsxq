@@ -1,0 +1,42 @@
+import React from 'react';
+import './App.css';
+// import Profile from './components/Profile';
+import Footer from './components/Footer';
+import News from './components/News';
+import Music from './components/Music';
+// import Settings from './components/Settings';
+// import DialogsWrap from './components/DialogsWrap';
+import UsersWrap from './components/Users/UsersWrap';
+import store from './redux/redux-store';
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+import { type } from 'os';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+function App() {
+  return (
+      <div className='app-wrapper'>
+        <Header/>
+        <Navbar/>
+        <div  className = 'wrappContent'>
+        {/* <BrowserRouter>
+            <Route path={"/hello"} render={ () => <HelloMessage message={"Hello friend"} /> } />
+            <Route path={"/bye"} render={() => <NewsMessage message={"bye"}/> } />
+      </BrowserRouter> */}
+        </div>
+        <Footer />
+      
+      </div>
+  );
+}
+// type MessageType ={ 
+//   message: string
+// }
+// function HelloMessage(props:MessageType){
+//   return <a href='#'> {props.message}</a>
+// }
+
+// const NewsMessage: React.FC<MessageType> = (props) =>{
+//   return <li> {props.message}</li>
+// }
+export default App;

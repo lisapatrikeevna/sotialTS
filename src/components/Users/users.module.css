@@ -1,0 +1,30 @@
+.avatar{
+    width: 80px;
+    border-radius: 50px;
+}
+.userItems{
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 5px 3px 9px black;
+    margin: 15px 0;
+    border-radius: 4px;
+    padding: 10px;
+    background: #b260dd;
+}
+.usersWrap{
+    padding: 20px 30px;
+}
+.avatarBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.currentPage{
+    font-weight: bold;
+}
+.ollPage{
+    font-weight: normal;
+}

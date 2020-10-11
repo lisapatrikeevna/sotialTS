@@ -1,0 +1,52 @@
+.btnAddet{
+    width: 200px;
+    height: 50px;
+    border-radius: 4px;
+    background:#69268ded;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: -47px;
+    margin-left: 210px;
+    display: block;
+}
+.post{
+    font-size: 16px;
+    color: #260d33;
+} 
+.item img{
+    border-radius: 50%;
+    width: 68px;
+    height: 68px;
+    margin-right: 50px;
+}
+.item{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.ava-desc,.item,.post h2{
+    padding-left: 20px;
+}
+.sendMessage{
+    margin: 20px;
+    border-radius: 15px;
+    background: #e3c3f4;
+    padding: 15px;
+    border: 1px solid #71319487;
+    box-shadow: 7px 3px 6px #000000a1;
+}
+.posts{
+    margin-top: 20px;
+}
+.wrap{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+.message{
+    padding: 7px;
+    background: #fff;
+    border-radius: 10px 10px 10px 0;
+}

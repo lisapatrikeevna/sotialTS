@@ -1,0 +1,52 @@
+.header img{
+    width: 80px;
+    
+   }
+   .header{
+     grid-area: header;
+     display: flex!important;
+     justify-content: space-between;
+     padding: 10px 20px;
+     /* margin-bottom: 10px; */
+     background: #69268d;
+   }
+   ul.contact{
+    justify-content: space-between;
+    /* width: 310px; */
+   }
+   .contact li a{
+     color: #fff;
+     text-decoration: none;
+     padding: 0 10px;
+   }
+   .search input{
+     width: 100%;
+     padding: 7px 12px;
+     margin: 10px 0;
+     border-radius: 4px;
+   }
+   li.avatar img{
+     width: 30px;
+     height: 30px;
+     border-radius: 50%;
+     border: 2px solid #000;
+   }
+   .wrap{
+    flex-wrap: wrap;
+    display: flex;
+    height: 50px;
+    overflow: hidden;
+    margin-top: 6px;
+    border-radius: 4px;
+   }
+   .wrap input{
+    width: 260px;
+  }
+   .btnImg img{
+    width: 60px;
+   }
+   .login a{
+       color: white;
+       text-decoration: none;
+       font-weight: bold;
+   }

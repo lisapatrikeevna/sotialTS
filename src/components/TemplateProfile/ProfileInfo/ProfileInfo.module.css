@@ -1,0 +1,22 @@
+.ava{
+    width: 160px;
+}
+.avaDesc{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+}
+.wrap{
+    border-bottom: 1px solid ;
+    display: flex;
+    padding: 0 15px;
+    word-spacing: 0.1em;
+}
+.wrap p{
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+.lastName{
+    padding: 0 5px;
+}

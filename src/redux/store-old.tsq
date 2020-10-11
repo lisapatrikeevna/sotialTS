@@ -1,0 +1,185 @@
+// const ADD_CHANGE_POST = "ADD-CHANGE-POST";
+// const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT";
+// const SEND_MESSAGE = "SEND-MESSAGE";
+// const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
+import profileReducer from "./ProfileReducer";
+import dialogReducer from "./DialogReducer";
+// import { SendMessageActionCreator } from './store';
+
+let store:storeType ={
+    _state:{
+        profile:{
+            messageForNewPost: '',
+            post:[
+                {id: 1, message: "some text", likesCount: 23 },
+                {id: 2, message: "here you goo", likesCount: 3 },
+                {id: 3, message: "let`s goo bebe", likesCount: 2 }
+              ]
+        },
+        dialogs:{
+            dialogItem: [
+                {name: "lisa", id: "1"},
+                {name: "Dan" , id: "2" },
+                {name: "Kat" , id: "3"}
+              ] ,
+            messageData: [
+                {id: 1, message: 'ok'},
+                {id: 1, message: 'to doms'},
+                {id: 1, message: 'hire you go!'}
+                ],
+            messageForNewDialog: '',
+            
+        }
+    } ,
+    _onChange(state: rootStateType){ console.log('state changed'); },
+    getState() { return this._state },
+    subscribe(observer: () => void) { this._onChange = observer},
+    // addChangePost() {
+    //     const newPost: postType = {
+    //         id: new Date().getTime(),
+    //         likesCount: 0,
+    //         message: this._state.profile.messageForNewPost 
+    //     }
+    //     this._state.profile.messageForNewPost  = '';
+    //     this._state.profile.post.push(newPost);
+    //     this._onChange(this._state);
+    // },
+    // changeNewPostText(newText:string) {
+    //     this._state.profile.messageForNewPost = newText;
+    //     this._onChange(this._state);
+    // },
+    // sendMessage() {
+    //     const newMessage: messagesItemType = {
+    //         id: new Date().getTime(),
+    //         message: this._state.dialogs.messageForNewDialog
+    //     }
+    //     this._state.dialogs.messageForNewDialog='';
+    //     this._state.dialogs.messageData.push(newMessage);
+    //     this._onChange(this._state);
+    // },
+    // changeNewMessage(messageText: string){
+    //     this._state.dialogs.messageForNewDialog = messageText;
+    //     this._onChange(this._state);
+    // },
+   dispatch(action:dispatchActionType){
+       this._state.dialogs = dialogReducer(this._state.dialogs,action);
+       this._state.profile = profileReducer(this._state.profile,action);
+
+       this._onChange(this._state);
+    // if(action.type === ADD_CHANGE_POST){
+    //     const newPost: postType = {
+    //         id: new Date().getTime(),
+    //         likesCount: 0,
+    //         message: this._state.profile.messageForNewPost
+    //     }
+    //     this._state.profile.messageForNewPost  = '';
+    //     this._state.profile.post.push(newPost);
+    //     this._onChange(this._state);
+    // }else if(action.type === CHANGE_NEW_POST_TEXT){
+    //     this._state.profile.messageForNewPost = action.newText;
+    //     this._onChange(this._state);
+    // }else if(action.type === SEND_MESSAGE){
+    //     const newMessage: messagesItemType = {
+    //         id: new Date().getTime(),
+    //         message: this._state.dialogs.messageForNewDialog
+    //     }
+    //     this._state.dialogs.messageForNewDialog='';
+    //     this._state.dialogs.messageData.push(newMessage);
+    //     this._onChange(this._state);
+    // }else if(action.type === CHANGE_NEW_MESSAGE){
+    //     this._state.dialogs.messageForNewDialog = action.messageText;
+    //     this._onChange(this._state);
+    // }
+    }
+}
+// export const addChangePostActionCreator = () => ({ type: ADD_CHANGE_POST})
+// export const onPostChangeActionCreator = (text) => ({type:CHANGE_NEW_POST_TEXT,newText:text })
+// export const SendMessageActionCreator = () => ({type: SEND_MESSAGE})
+// export const changeMessageActionCreator = (text) => ({type:CHANGE_NEW_MESSAGE,messageText:text })
+
+
+export type addChangePostAction={
+    type:'ADD-CHANGE-POST'
+}
+export type changeNewPostTextAction={
+    type:'CHANGE-NEW-POST-TEXT'
+    newText: string
+}
+// export type sendMessageAction={
+//     type:'SEND-MESSAGE'
+// }
+export type sendMessageAction=ReturnType<typeof SendMessageActionCreator>
+export type changeNewMessageAction={
+    type:'CHANGE-NEW-POST-TEXT'
+    messageText: string
+}
+export type dispatchActionType=changeNewPostTextAction|sendMessageAction|changeNewMessageAction|addChangePostAction;
+export type storeType={
+    _state: rootStateType
+    _onChange: (state: rootStateType)=> void
+    getState: ()=> rootStateType
+    // changeNewPostText: (newText:string)=>void
+    // addChangePost: ()=>void
+    // sendMessage: ()=>void
+    // changeNewMessage: (messageText: string)=>void
+ 
+    subscribe: (observer: () => void)=>void
+    dispatch:(action:dispatchActionType)=>void
+}
+export type dialogsType = {
+    dialogItem: Array<dialogsItemType>
+    messageData: Array<messagesItemType>
+    messageForNewDialog: string
+}
+export type profileType = {
+      post: Array<postType>
+      messageForNewPost: string
+    }
+export type messagesItemType = {
+        message: string
+        id : number
+    }
+export type dialogsItemType = {
+        name: string
+        id : string 
+    } 
+export type postType = {
+        message: string
+        likesCount: number
+        id: number 
+      } 
+export type rootStateType={
+    profile: profileType
+    dialogs: dialogsType
+}
+
+// export const  addChangePost = ()  => {
+//     const newPost: postType = {
+//         id: new Date().getTime(),
+//         likesCount: 0,
+//         message: state.profile.messageForNewPost 
+//     }
+//     state.profile.messageForNewPost  = '';
+//     state.profile.post.push(newPost);
+//     rerenderEntireTree(state);
+// };
+// export const changeNewPostText =(newText:string)=>{
+//     state.profile.messageForNewPost = newText;
+//     rerenderEntireTree(state);
+// }
+// export const sendMessage = () => {
+//     const newMessage: messagesItemType = {
+//         id: new Date().getTime(),
+//         message: state.dialogs.messageForNewDialog
+//     }
+//     state.dialogs.messageForNewDialog='';
+//     state.dialogs.messageData.push(newMessage);
+//     rerenderEntireTree(state);
+// };
+// export const changeNewMessage = (messageText: string)=>{
+//  state.dialogs.messageForNewDialog = messageText;
+//  rerenderEntireTree(state);
+// }
+// export const subskribe =  (observer:any) => { rerenderEntireTree= observer}
+// window.store =store;
+export default oldStore;
