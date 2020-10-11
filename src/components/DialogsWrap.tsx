@@ -1,6 +1,9 @@
 import React  from 'react';
 import  "./css/Dialogs.css";
-import {changeMessageActionCreator, SendMessageActionCreator} from '../redux/DialogReducer';
+import {
+    changeNewMessage,
+    sendMessage,
+} from '../redux/DialogReducer';
 import {RootStateType} from "../redux/ReduxStore";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -36,16 +39,6 @@ let mapStateToProps=(state:RootStateType)=>{
         message:state.dialogs.messageForNewDialog
     }
 }
-let mapDispatchToProps =(dispatch:Dispatch)=>{
-    return{
-        sendMessage:()=>{
-            dispatch(SendMessageActionCreator())
-        },
-        changeNewMessage:(message:string)=>{
-            dispatch(changeMessageActionCreator(message))
-        }
-    }
-}
-const DialogsWrap = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+const DialogsWrap = connect(mapStateToProps,{sendMessage,changeNewMessage})(Dialogs);
 
 export default DialogsWrap;

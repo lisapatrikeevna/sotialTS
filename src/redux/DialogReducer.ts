@@ -1,6 +1,6 @@
-type SendMessageActionType = ReturnType<typeof SendMessageActionCreator>
-type ChangeNewMessageActionType = ReturnType<typeof changeMessageActionCreator>
-type dialogsActionType = SendMessageActionType| ChangeNewMessageActionType;
+type SendMessageAType = ReturnType<typeof sendMessage>
+type ChangeNewMessageAType = ReturnType<typeof changeNewMessage>
+type dialogsActionType = SendMessageAType| ChangeNewMessageAType;
 type messagesItemType = {
     message: string
     id : number
@@ -55,7 +55,7 @@ const dialogReducer = ( state=initialState, action:dialogsActionType) => {
    }
 
 }
-export const SendMessageActionCreator = () => ({type:SEND_MESSAGE} as const)
-export const changeMessageActionCreator = (message:string) => ({type:CHANGE_NEW_MESSAGE,newText:message }as const)
+export const sendMessage = () => ({type:SEND_MESSAGE} as const)
+export const changeNewMessage = (message:string) => ({type:CHANGE_NEW_MESSAGE,newText:message }as const)
 
 export default dialogReducer;

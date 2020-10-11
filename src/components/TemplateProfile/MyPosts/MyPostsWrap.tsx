@@ -45,8 +45,8 @@ let mapDispatchToProps = (dispatch:Dispatch) => {
         addChangePost: () => {
             dispatch(AddChangePostActionCreator())
         },
-        onPostChange: (text:string) => {
-            dispatch(OnPostChangeActionCreator(text))
+        onPostChange: (message:string) => {
+            dispatch(OnPostChangeActionCreator(message))
         }
     }
 }

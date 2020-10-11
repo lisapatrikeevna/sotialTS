@@ -1,11 +1,14 @@
-
-
 type AddChangePostActionType = ReturnType<typeof AddChangePostActionCreator>
 type ChangeNewPostTextActionType = ReturnType<typeof OnPostChangeActionCreator>
-type dispatchActionType = AddChangePostActionType| ChangeNewPostTextActionType;
+type setUserProfile = ReturnType<typeof setUserProfile>
+
+type dispatchActionType = AddChangePostActionType | ChangeNewPostTextActionType | setUserProfile;
+
+
 type profileInitialStateType = {
     posts: Array<postType>
     messageForNewPost: string
+    profile: any
 }
 export type postType = {
     id: number
@@ -13,18 +16,21 @@ export type postType = {
     likesCount: number
 }
 
-let initialState :profileInitialStateType={
+let initialState: profileInitialStateType = {
     messageForNewPost: '',
-    posts:[
-        {id: 1, message: "some text", likesCount: 23 },
-        {id: 2, message: "here you goo", likesCount: 3 },
-        {id: 3, message: "let`s goo bebe", likesCount: 2 }
-    ]
+    posts: [
+        {id: 1, message: "some text", likesCount: 23},
+        {id: 2, message: "here you goo", likesCount: 3},
+        {id: 3, message: "let`s goo bebe", likesCount: 2}
+    ],
+    profile: null
 }
 
 const ADD_CHANGE_POST = "ADD-CHANGE-POST";
 const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT";
-const profileReducer = ( state=initialState, action:dispatchActionType) => {
+const SET_USER_PROFILE = "SET_USER_PROFILE";
+
+const profileReducer = (state: profileInitialStateType = initialState, action: dispatchActionType): profileInitialStateType => {
     switch (action.type) {
         case ADD_CHANGE_POST:
             const newPost: postType = {
@@ -34,18 +40,27 @@ const profileReducer = ( state=initialState, action:dispatchActionType) => {
             }
             return {
                 ...state,
-                messageForNewPost :'',
-                posts: [...state.posts,newPost]
+                messageForNewPost: '',
+                posts: [...state.posts, newPost]
             };
+
         case CHANGE_NEW_POST_TEXT:
             return {
                 ...state,
-                messageForNewPost: action.newText
+                messageForNewPost: action.message
             };
+
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
+            };
+
         default :
             return state;
     }
 }
-export const AddChangePostActionCreator = () => ({ type: ADD_CHANGE_POST} as const)
-export const OnPostChangeActionCreator = (message:string) => ({type:CHANGE_NEW_POST_TEXT,newText:message })
+export const AddChangePostActionCreator = () => ({type: ADD_CHANGE_POST} as const)
+export const OnPostChangeActionCreator = (newText: string) => ({type: CHANGE_NEW_POST_TEXT, message: newText} as const)
+export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
 export default profileReducer;
