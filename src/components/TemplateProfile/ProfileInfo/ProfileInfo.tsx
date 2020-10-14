@@ -16,7 +16,10 @@ function ProfileInfo (props: propsType){
     return(
         <div className = {cl.avaDesc}>
             {/*<img src={imgAvatar} className={cl.ava} alt="ava"/>*/}
-            <img src={props.profile.photos.large} className={cl.ava} alt="ava"/>
+            <div>
+                <img src={props.profile.photos.large} className={cl.ava} alt="ava"/>
+                <span className={cl.maskFoto}></span>
+            </div>
                <div className={cl.wrap}>
                     <p className={cl.name}>{props.profile.fullName}</p>
                     {/*<p className={cl.lastName}> lastName</p>*/}

@@ -2,74 +2,98 @@ import React from 'react';
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {
+    followingIsProgressAC,
     followAC,
     isFetchingAC,
     setCurrentPageAC,
-     setTotalUsersAC,
+    setTotalUsersAC,
     setUsersAC,
     unfollowAC,
-    userItemType
+    userItemType, getUsersTC, onFollowTC, onUnFollowTC
 } from "../../redux/UsersReducer";
 import {RootStateType} from "../../redux/ReduxStore";
 import axios from "axios";
 import {Users} from "./Users";
 import preloader from "./../../assets/img/805.gif"
 import {Preloader} from "../../common/Preloader";
+import {UserApi} from "../../common/AsksApi";
 
-type propsType = {
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: Array<userItemType>) => void
+type propsType = MapStateToPropsType & MapDispatchToPropsType
+    // setUsers: (users: Array<userItemType>) => void
+    // setCurrentPage: (currentPage: number) => void
+    // setTotalUsers: (totalCount: number) => void
+    // toggleIsFetching: (isFetching: boolean) => void
+    // toggleFollowingIsProgress: (followingIsProgress: boolean, id: number) => void
+   // getUsersTC: (currentPage: number, pagesSize: number) => void
+   // onFollowTC:(id:number)=>void
+   // onUnFollowTC:(id:number)=>void
+
+export type MapStateToPropsType={
     users: Array<userItemType>
     pagesSize: number
     currentPage: number
     countUsers: number
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsers: (totalCount: number) => void
-    isFetching:boolean
-    toggleIsFetching:(isFetching:boolean)=>void
+    isFetching: boolean
+    followingIsProgress: number[]
 }
-type AxiosGetType = {
+export type MapDispatchToPropsType={
+    getUsersTC: (currentPage: number, pagesSize: number) => void
+    onFollowTC:(id:number)=>void
+    onUnFollowTC:(id:number)=>void
+}
+export type AxiosGetType = {
     items: Array<userItemType>
     totalCount: number
     error: string
+    data: DataType
+}
+export type DataType = {
+    id: number
+    email: string
+    login: string
+    resultCode: number
 }
 
 export class UsersContainer extends React.Component<propsType> {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        axios.get<AxiosGetType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesSize}`)
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsers(response.data.totalCount);
-            });
-
+        // this.props.toggleIsFetching(true)
+        // UserApi.getUsers(this.props.currentPage,this.props.pagesSize)
+        //     .then(response => {
+        //         this.props.toggleIsFetching(false)
+        //         this.props.setUsers(response.items);
+        //         this.props.setTotalUsers(response.totalCount);
+        //     });
+        this.props.getUsersTC(this.props.currentPage,this.props.pagesSize)
     }
 
     onPageChanged = (currentPage: number) => {
-        this.props.toggleIsFetching(true)
-        this.props.setCurrentPage(currentPage)
-        axios.get<AxiosGetType>(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pagesSize}`)
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items);
-            });
+        // this.props.toggleIsFetching(true)
+        // this.props.setCurrentPage(currentPage)
+        // UserApi.getUsers(currentPage, this.props.pagesSize)
+        //     .then(response => {
+        //         this.props.toggleIsFetching(false)
+        //         this.props.setUsers(response.items);
+        //     });
+        this.props.getUsersTC(currentPage,this.props.pagesSize)
     }
 
     render() {
         // debugger
         return (
             <>
-                {this.props.isFetching ? <Preloader/> : null }
+                {this.props.isFetching ? <Preloader/> : null}
                 <Users
-                    follow={this.props.follow}
-                    unfollow={this.props.unfollow}
                     users={this.props.users}
                     pagesSize={this.props.pagesSize}
                     currentPage={this.props.currentPage}
                     countUsers={this.props.countUsers}
                     onPageChanged={this.onPageChanged}
+                   // toggleFollowingIsProgress={this.props.toggleFollowingIsProgress}
+                    followingIsProgress={this.props.followingIsProgress}
+                    onFollowTC={this.props.onFollowTC}
+                    onUnFollowTC={this.props.onUnFollowTC}
+                    isFetching={this.props.isFetching}
+
                 />
             </>
         )
@@ -83,14 +107,16 @@ let mapStateToProps = (state: RootStateType) => {
         currentPage: state.users.currentPage,
         countUsers: state.users.countUsers,
         isFetching: state.users.isFetching,
+        followingIsProgress: state.users.followingIsProgress
     }
 }
 const UsersWrap = connect(mapStateToProps, {
-    follow: followAC,
-    unfollow:unfollowAC,
-    setUsers: setUsersAC,
-    setCurrentPage: setCurrentPageAC,
-    setTotalUsers: setTotalUsersAC,
-    toggleIsFetching: isFetchingAC
+    // setCurrentPage: setCurrentPageAC,
+    // setTotalUsers: setTotalUsersAC,
+    // toggleIsFetching: isFetchingAC,
+    // toggleFollowingIsProgress: followingIsProgressAC,
+    getUsersTC,
+    onFollowTC,
+    onUnFollowTC,
 })(UsersContainer);
 export default UsersWrap;

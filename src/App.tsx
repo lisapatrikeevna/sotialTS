@@ -10,6 +10,7 @@ import Settings from './components/Settings';
 import DialogsWrap from "./components/DialogsWrap";
 import UsersWrap from "./components/Users/UsersWrap";
 import ProfileWrap from "./components/ProfileWrap";
+import HeaderWrap from "./components/HeaderWrap";
 // import {UsersWrap} from "./components/Users/UsersWrap";
 
 
@@ -17,7 +18,7 @@ function App() {
 
   return (
       <div className='app-wrapper'>
-        <Header/>
+        <HeaderWrap />
         <Navbar/>
         <div  className = 'wrappContent'>
               <Route path={"/dialogs"} render={ () => <DialogsWrap/> } />

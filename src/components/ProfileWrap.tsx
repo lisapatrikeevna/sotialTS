@@ -1,10 +1,10 @@
 import React from 'react';
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/ReduxStore";
 import {setUserProfile} from "../redux/ProfileReducer";
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import {ProfileUserApi} from "../common/AsksApi";
 
 export type propsType = {
     profile:AxiosGetType
@@ -31,17 +31,17 @@ export type contactsType = {
     youtube:string
     mainLink:string
 }
-type photosType = {
+export type photosType = {
     small:string
     large:string
 }
 export class ProfileContainer extends React.Component<propsType & RouteComponentProps<TRouteParams>> {
     componentDidMount() {
         // this.props.match.params.userId(true)
-        debugger
+        //debugger
         let userID = this.props.match.params.userID;
-        if(!userID){ userID =' 2'; }
-        axios.get<AxiosGetType>(`https://social-network.samuraijs.com/api/1.0/profile/`+userID)
+        if(!userID){ userID ='11446'; }
+        ProfileUserApi.getUser(+userID)
             .then(response => {
                 // this.props.toggleIsFetching(false)
                 this.props.setUserProfile(response.data);

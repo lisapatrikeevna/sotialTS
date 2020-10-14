@@ -20,3 +20,6 @@
 .lastName{
     padding: 0 5px;
 }
+.maskFoto{
+    background: url("../../../assets/img/maskFor1.png");
+}

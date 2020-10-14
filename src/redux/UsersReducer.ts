@@ -1,16 +1,20 @@
+import {FollowUserApi, UserApi} from "../common/AsksApi";
+
 type UnfollowACType = ReturnType<typeof unfollowAC>
 type FollowACType = ReturnType<typeof followAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersACType = ReturnType<typeof setTotalUsersAC>
 type IsFetchingACType = ReturnType<typeof isFetchingAC>
-type UsersActionType = UnfollowACType | FollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersACType |IsFetchingACType
+type follovinIsProgresACType = ReturnType<typeof followingIsProgressAC>
+type UsersActionType = UnfollowACType | FollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersACType |IsFetchingACType|follovinIsProgresACType
 export type usersInitialStateType = {
     users: Array<userItemType>
     pagesSize: number
     currentPage: number
     countUsers: number
     isFetching: boolean
+    followingIsProgress:number[]
 }
 export type userItemType = {
     name: string
@@ -30,7 +34,8 @@ let initialState: usersInitialStateType = {
     pagesSize: 7,
     currentPage: 1,
     countUsers: 10,
-    isFetching: false
+    isFetching: false,
+    followingIsProgress:[]
 }
 
 const usersReducer = (state: usersInitialStateType = initialState, action: UsersActionType): usersInitialStateType => {
@@ -68,6 +73,13 @@ const usersReducer = (state: usersInitialStateType = initialState, action: Users
         case 'TOGGLE-IS-FETHING': {
             return {...state, isFetching: action.isFetching}
         }
+        case 'FOLOVING-IS-PROGRES': {
+            return {...state,
+                followingIsProgress: action.followingIsProgress
+                    ? [...state.followingIsProgress,action.id]
+                    : state.followingIsProgress.filter(id=> id !==action.id)
+            }
+        }
         default  :
             return state;
     }
@@ -81,6 +93,47 @@ export const setUsersAC = (users: Array<userItemType>) => ({type: 'SET-USERS', u
 export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
 export const setTotalUsersAC = (totalCount: number) => ({type: 'SET-TOTAL-COUNT', totalCount} as const)
 export const isFetchingAC = (isFetching:boolean) => ({type: 'TOGGLE-IS-FETHING', isFetching} as const)
+export const followingIsProgressAC = (followingIsProgress:boolean,id:number) => ({type: 'FOLOVING-IS-PROGRES', followingIsProgress,id} as const)
 
+//type Dispatch<S> = Redux.Dispatch<S>;
+export const getUsersTC = (currentPage:number,pagesSize:number)=>{
+    // return(dispatch:Dispatch<S>)=>{
+    return(dispatch:any)=>{
+        dispatch(isFetchingAC(true))
+        UserApi.getUsers(currentPage,pagesSize)
+            .then(response => {
+                dispatch(isFetchingAC(false));
+                dispatch(setUsersAC(response.items));
+                dispatch(setTotalUsersAC(response.totalCount));
+            });
+
+    }
+}
+export const onFollowTC = (id: number) =>{
+    return(dispatch:any)=>{
+        dispatch(followingIsProgressAC(true,id))
+        FollowUserApi.follow(id)
+            .then(response => {
+                if(response.data.resultCode===0){
+                    dispatch(followAC(id))
+                           }
+                dispatch(followingIsProgressAC(false,id))
+            });
+    }
+
+}
+export const onUnFollowTC = (id: number) =>{
+    return(dispatch:any)=>{
+        dispatch(followingIsProgressAC(true,id))
+        FollowUserApi.unfollow(id)
+            .then(response => {
+                if(response.data.resultCode===0){
+                    dispatch(followAC(id))
+                           }
+                            dispatch(followingIsProgressAC(false,id))
+            });
+    }
+
+}
 // window.state:usersInitialStateType=state:usersInitialStateType;
 export default usersReducer;

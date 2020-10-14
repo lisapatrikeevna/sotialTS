@@ -1,19 +1,23 @@
 import React from 'react';
 import cl from './users.module.css';
 import userAvatar from '../../assets/img/images.jpg';//avatarchik.jpg
-import {userItemType} from "../../redux/UsersReducer";
 import { NavLink } from 'react-router-dom';
+import {MapDispatchToPropsType, MapStateToPropsType} from './UsersWrap';
+import {FollowUserApi} from "../../common/AsksApi";
+import {userItemType} from "../../redux/UsersReducer";
 
 type propsType = {
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    // setUsers: (users: Array<userItemType>) => void
-    users: Array<userItemType>
+    users: Array<userItты emType>
     pagesSize: number
     currentPage: number
     countUsers: number
-    // setCurrentPage: (currentPage: number) => void
-    // setTotalUsers: (totalCount: number) => void
+    onPageChanged: (currentPage: number) => void
+    toggleFollowingIsProgress:(followingIsProgress:boolean,id:number)=>void
+    followingIsProgress: number[]
+    onFollowTC:(id:number)=>void
+}
+//type propsType = MapStateToPropsType & MapDispatchToPropsType &UsersPropsTYpe
+type UsersPropsTYpe={
     onPageChanged: (currentPage: number) => void
 }
 export const Users = (props: propsType) => {
@@ -25,19 +29,30 @@ export const Users = (props: propsType) => {
     }
     return (
         <>
-            <div>
-                {pages.map(p => {
-                    return <span className={props.currentPage ? cl.ollPage : cl.currentPage}
-                        onClick={(e) => {props.onPageChanged(p) } }>-{p}</span>
-                })}
-            </div>
+
             <div className={cl.usersWrap}>
                 {props.users.map(u => {
                     const changeFollow = () => {
-                        props.follow(u.id)
+                        // props.toggleFollowingIsProgress(true,u.id)
+                        // FollowUserApi.follow(u.id)
+                        //     .then(response => {
+                        //        if(response.data.resultCode===0){
+                        //            props.follow(u.id)
+                        //        }
+                        //         props.toggleFollowingIsProgress(false,u.id)
+                        //     });
+                        props.onFollowTC(u.id)
                     }
                     const changeUnFollow = () => {
-                        props.unfollow(u.id)
+                        // props.toggleFollowingIsProgress(true,u.id)
+                        // FollowUserApi.unfollow(u.id)
+                        //     .then(response => {
+                        //         if(response.data.resultCode===0){
+                        //             props.unfollow(u.id)
+                        //         }
+                        //         props.toggleFollowingIsProgress(false,u.id)
+                        //     });
+                        props.onUnFollowTC(u.id)
                     }
                     return (
                         <div key={u.id} className={cl.userItems}>
@@ -51,7 +66,7 @@ export const Users = (props: propsType) => {
                                  {/*<div><img src={u.photoUrl} alt="icon-user" className={cl.avatar}/></div>*/}
                                  <div>
                                     {u.followed ?
-                                        <button onClick={changeUnFollow}>unfollow</button> :
+                                        <button onClick={changeUnFollow} disabled={props.followingIsProgress.some(id=>id=== u.id) }>unfollow</button> :
                                         <button onClick={changeFollow}>follow</button>
                                     }
                                 </div>
@@ -62,7 +77,7 @@ export const Users = (props: propsType) => {
                                     <div>{u.status}</div>
                                 </span>
 
-                                <span>
+                          <span>
                                     <div>{"city"}</div>
                                     <div>{"country"}</div>
                                 </span>
@@ -72,6 +87,12 @@ export const Users = (props: propsType) => {
                     )
                 })
                 }
+            </div>
+            <div>
+                {pages.map(p => {
+                    return <span className={props.currentPage ? cl.ollPage : cl.currentPage}
+                                 onClick={(e) => {props.onPageChanged(p) } }>-{p}</span>
+                })}
             </div>
         </>
     )
