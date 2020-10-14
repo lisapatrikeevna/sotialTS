@@ -88,12 +88,9 @@ export class UsersContainer extends React.Component<propsType> {
                     currentPage={this.props.currentPage}
                     countUsers={this.props.countUsers}
                     onPageChanged={this.onPageChanged}
-                   // toggleFollowingIsProgress={this.props.toggleFollowingIsProgress}
                     followingIsProgress={this.props.followingIsProgress}
                     onFollowTC={this.props.onFollowTC}
                     onUnFollowTC={this.props.onUnFollowTC}
-                    isFetching={this.props.isFetching}
-
                 />
             </>
         )

@@ -1,4 +1,5 @@
 import {photosType} from "../components/ProfileWrap";
+import {AuthMyApi} from "../common/AsksApi";
 
 type setAuthMyACType = ReturnType<typeof setAuthMyAC>
 type ActionType = setAuthMyACType;
@@ -36,5 +37,17 @@ export const setAuthMyAC = (id: number, email: string, login: string) => ({
     type: 'SET-AUTH-MY', data: {id, email, login}
 } as const)
 
+export const setAuthMyTC = ()=>{
+    return(dispatch:any)=>{
+        AuthMyApi.getMy()
+            .then(response => {
+                if (response.resultCode === 0) {
+                    debugger
+                    let {id, email, login} = response.data
+                    dispatch(setAuthMyAC(id, email, login))
+                }
+            });
+    }
+}
 // window.state:InitialStateType=state:InitialStateType;
 export default authReducer;

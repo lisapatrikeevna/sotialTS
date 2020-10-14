@@ -1,3 +1,5 @@
+import {ProfileUserApi} from "../common/AsksApi";
+
 type AddChangePostActionType = ReturnType<typeof AddChangePostActionCreator>
 type ChangeNewPostTextActionType = ReturnType<typeof OnPostChangeActionCreator>
 type setUserProfile = ReturnType<typeof setUserProfile>
@@ -64,3 +66,14 @@ export const AddChangePostActionCreator = () => ({type: ADD_CHANGE_POST} as cons
 export const OnPostChangeActionCreator = (newText: string) => ({type: CHANGE_NEW_POST_TEXT, message: newText} as const)
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
 export default profileReducer;
+
+export const getUserProfileTC = (userID:string) =>{
+    return(dispatch:any)=>{
+        ProfileUserApi.getUser(+userID)
+            .then(response => {
+                // this.props.toggleIsFetching(false)
+                dispatch(setUserProfile(response.data));
+            });
+
+    }
+}

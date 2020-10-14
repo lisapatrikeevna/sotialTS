@@ -40,7 +40,6 @@ export const FollowUserApi={
     follow(userId:number){
         return  instans.post(`follow/${userId}`)
     },
-
 }
 export const ProfileUserApi={
     getUser(userId:number){

@@ -11,6 +11,7 @@ import DialogsWrap from "./components/DialogsWrap";
 import UsersWrap from "./components/Users/UsersWrap";
 import ProfileWrap from "./components/ProfileWrap";
 import HeaderWrap from "./components/HeaderWrap";
+import LoginWrap from "./components/LoginWrap";
 // import {UsersWrap} from "./components/Users/UsersWrap";
 
 
@@ -27,6 +28,7 @@ function App() {
               {/* <Route path={"/music"} render={() => <Music/>} /> */}
               <Route path={"/settings"} render={() => <Settings/>} />
               <Route path={"/users"} render={() => <UsersWrap/>} />
+              <Route path={"/login"} render={() => <LoginWrap/>} />
         </div>
         <Footer/>
       </div>

@@ -6,6 +6,7 @@ import {RootStateType} from "../redux/ReduxStore";
 import {setAuthMyAC, setAuthMyTC} from "../redux/AuthReducer";
 import {AuthMyApi, ProfileUserApi} from '../common/AsksApi';
 import {photosType} from "./ProfileWrap";
+import Login from "./Login";
 
 type DispatchStateType = {
     //authMyData: (id: number, email: string, login: string) => void
@@ -21,32 +22,17 @@ type MapStateType = {
 }
 
 
-class HeaderWrap extends React.Component <MapStateType & DispatchStateType> {
+class LoginWrap extends React.Component <MapStateType & DispatchStateType> {
     componentDidMount() {
-        // AuthMyApi.getMy()
-        //     .then(response => {
-        //         if (response.resultCode === 0) {
-        //             debugger
-        //             let {id, email, login} = response.data
-        //             this.props.authMyData(id, email, login)
-        //         }
-        //       //  let userId=response.data.data.id
-        //     });
-        this.props.setAuthMyTC()
-        // ProfileUserApi.getUser(+userId)
-        //     .then(response => {
-        //         // this.props.toggleIsFetching(false)
-        //         this.props.authMyData(response.data);
-        //     });
 
     }
 
     render() {
         return (
-            <Header
-               login={this.props.login}
-                aught={this.props.aught}
-                photos={this.props.avatar}
+            <Login
+               // login={this.props.login}
+               //  aught={this.props.aught}
+               //  photos={this.props.avatar}
             />
         )
     }
@@ -65,4 +51,4 @@ let mapStateToProps = (state: RootStateType): MapStateType => {
 }
 export default connect
 //<MapStateType, DispatchStateType, {}, RootStateType>
-(mapStateToProps, {setAuthMyTC})(HeaderWrap);
+(mapStateToProps, {setAuthMyTC})(LoginWrap);

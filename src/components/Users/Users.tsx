@@ -4,22 +4,23 @@ import userAvatar from '../../assets/img/images.jpg';//avatarchik.jpg
 import { NavLink } from 'react-router-dom';
 import {MapDispatchToPropsType, MapStateToPropsType} from './UsersWrap';
 import {FollowUserApi} from "../../common/AsksApi";
-import {userItemType} from "../../redux/UsersReducer";
+import {onUnFollowTC, userItemType} from "../../redux/UsersReducer";
 
 type propsType = {
-    users: Array<userItты emType>
+    users: Array<userItemType>
     pagesSize: number
     currentPage: number
     countUsers: number
     onPageChanged: (currentPage: number) => void
-    toggleFollowingIsProgress:(followingIsProgress:boolean,id:number)=>void
+    //toggleFollowingIsProgress:(followingIsProgress:boolean,id:number)=>void
     followingIsProgress: number[]
     onFollowTC:(id:number)=>void
+    onUnFollowTC:(id:number)=>void
 }
 //type propsType = MapStateToPropsType & MapDispatchToPropsType &UsersPropsTYpe
-type UsersPropsTYpe={
-    onPageChanged: (currentPage: number) => void
-}
+// type UsersPropsTYpe={
+//     onPageChanged: (currentPage: number) => void
+// }
 export const Users = (props: propsType) => {
 
     let countPages = Math.ceil(props.countUsers / props.pagesSize);

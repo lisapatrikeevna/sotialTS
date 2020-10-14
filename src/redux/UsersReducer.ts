@@ -83,7 +83,6 @@ const usersReducer = (state: usersInitialStateType = initialState, action: Users
         default  :
             return state;
     }
-
 }
 
 
@@ -114,23 +113,18 @@ export const onFollowTC = (id: number) =>{
         dispatch(followingIsProgressAC(true,id))
         FollowUserApi.follow(id)
             .then(response => {
-                if(response.data.resultCode===0){
-                    dispatch(followAC(id))
-                           }
+                if(response.data.resultCode===0){  dispatch(followAC(id)) }
                 dispatch(followingIsProgressAC(false,id))
             });
     }
-
 }
 export const onUnFollowTC = (id: number) =>{
     return(dispatch:any)=>{
         dispatch(followingIsProgressAC(true,id))
         FollowUserApi.unfollow(id)
             .then(response => {
-                if(response.data.resultCode===0){
-                    dispatch(followAC(id))
-                           }
-                            dispatch(followingIsProgressAC(false,id))
+                if(response.data.resultCode===0){ dispatch(unfollowAC(id)) }
+                dispatch(followingIsProgressAC(false,id))
             });
     }
 

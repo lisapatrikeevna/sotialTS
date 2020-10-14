@@ -8,6 +8,7 @@ import {RootStateType} from "../redux/ReduxStore";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {IsLoginRedirect} from "../common/lsLoginHOC";
 
 
 // const  DialogsWrap = (props: DialogsPropsType) => {
@@ -39,6 +40,6 @@ let mapStateToProps=(state:RootStateType)=>{
         message:state.dialogs.messageForNewDialog
     }
 }
-const DialogsWrap = connect(mapStateToProps,{sendMessage,changeNewMessage})(Dialogs);
+const DialogsWrap = connect(mapStateToProps,{sendMessage,changeNewMessage})(IsLoginRedirect(Dialogs));
 
 export default DialogsWrap;

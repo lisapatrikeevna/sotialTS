@@ -8,6 +8,7 @@ import { photosType } from './ProfileWrap';
 type propsType={
     aught:boolean
     photos:photosType| null
+    login: string | null
 }
 function Header (props:propsType) {
     return (
@@ -20,8 +21,10 @@ function Header (props:propsType) {
                 <button className="btnImg"><img src={btnImg} alt=""/></button>
             </div>
             <span className="login">
-               {props.aught? <NavLink to={'/login'}>Login</NavLink> :
-                   <img src={props.photos ? props.photos.large : ''} className='ava' alt="ava"/>}
+               {props.aught ?
+                   <span><img src={props.photos ? props.photos.large : ''} className='ava' alt="ava"/> <br/>{props.login}</span>
+                   : <NavLink to={'/login'}>Login</NavLink>
+               }
             </span>
         </header>
     )

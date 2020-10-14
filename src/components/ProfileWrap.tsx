@@ -2,13 +2,15 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/ReduxStore";
-import {setUserProfile} from "../redux/ProfileReducer";
+import {getUserProfileTC, setUserProfile} from "../redux/ProfileReducer";
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {ProfileUserApi} from "../common/AsksApi";
+import {IsLoginRedirect} from "../common/lsLoginHOC";
 
 export type propsType = {
     profile:AxiosGetType
-    setUserProfile:(profile:AxiosGetType)=>void
+    //setUserProfile:(profile:AxiosGetType)=>void
+    getUserProfileTC: (userID:string)=>void
 }
 type TRouteParams = {
     userID:string // since it route params
@@ -41,12 +43,12 @@ export class ProfileContainer extends React.Component<propsType & RouteComponent
         //debugger
         let userID = this.props.match.params.userID;
         if(!userID){ userID ='11446'; }
-        ProfileUserApi.getUser(+userID)
-            .then(response => {
-                // this.props.toggleIsFetching(false)
-                this.props.setUserProfile(response.data);
-            });
-
+        // ProfileUserApi.getUser(+userID)
+        //     .then(response => {
+        //         // this.props.toggleIsFetching(false)
+        //         this.props.setUserProfile(response.data);
+        //     });
+        this.props.getUserProfileTC(userID)
     }
     render() {
         return (
@@ -63,5 +65,5 @@ let mapStateToProps = (state: RootStateType) => {
     }
 }
 let withRouterProfileContainer = withRouter(ProfileContainer);
-const ProfileWrap =connect(mapStateToProps,{setUserProfile})(withRouterProfileContainer)
+const ProfileWrap =connect(mapStateToProps,{getUserProfileTC})(IsLoginRedirect(withRouterProfileContainer))
 export default ProfileWrap;
