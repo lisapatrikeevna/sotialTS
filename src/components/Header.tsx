@@ -22,7 +22,7 @@ function Header (props:propsType) {
             </div>
             <span className="login">
                {props.aught ?
-                   <span><img src={props.photos ? props.photos.large : ''} className='ava' alt="ava"/> <br/>{props.login}</span>
+                   <span><img src={props.photos ? props.photos.large : 'plase for ava'} className='ava' alt="ava"/> <br/>{props.login}</span>
                    : <NavLink to={'/login'}>Login</NavLink>
                }
             </span>

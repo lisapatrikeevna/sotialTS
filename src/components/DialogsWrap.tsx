@@ -1,7 +1,7 @@
 import React  from 'react';
 import  "./css/Dialogs.css";
 import {
-    changeNewMessage,
+    changeNewMessage, dialogsInitialStateType, dialogsItemType,
     sendMessage,
 } from '../redux/DialogReducer';
 import {RootStateType} from "../redux/ReduxStore";
@@ -9,6 +9,7 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {IsLoginRedirect} from "../common/lsLoginHOC";
+import {messagesItemType} from "./TemplateDialogs/UserDialogs/MessagesItem";
 
 
 // const  DialogsWrap = (props: DialogsPropsType) => {
@@ -34,12 +35,20 @@ import {IsLoginRedirect} from "../common/lsLoginHOC";
 //     );
 //
 // }
-let mapStateToProps=(state:RootStateType)=>{
+type mapStatePropsType={
+    dialogs:Array<dialogsItemType>&Array<messagesItemType>
+}
+type mapDispatchPropsType={
+    sendMessage  : (value:string) =>void
+    // changeNewMessage:(value:string) =>void
+}
+
+let mapStateToProps=(state:RootStateType):mapStatePropsType=>{
     return{
         dialogs:state.dialogs,
-        message:state.dialogs.messageForNewDialog
+      //  message:state.dialogs.messageForNewDialog
     }
 }
-const DialogsWrap = connect(mapStateToProps,{sendMessage,changeNewMessage})(IsLoginRedirect(Dialogs));
+const DialogsWrap = connect<mapStatePropsType,mapDispatchPropsType,{},RootStateType>(mapStateToProps,{sendMessage(value),})(IsLoginRedirect(Dialogs));
 
 export default DialogsWrap;

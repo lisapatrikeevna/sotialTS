@@ -9,15 +9,17 @@ import News from './components/News';
 import Settings from './components/Settings';
 import DialogsWrap from "./components/DialogsWrap";
 import UsersWrap from "./components/Users/UsersWrap";
-import ProfileWrap from "./components/ProfileWrap";
 import HeaderWrap from "./components/HeaderWrap";
 import LoginWrap from "./components/LoginWrap";
+import ProfileWrap from "./components/ProfileWrap";
+import {IsAuthContext} from "./redux/contextH";
+import Login from "./components/Login";
 // import {UsersWrap} from "./components/Users/UsersWrap";
 
 
 function App() {
-
   return (
+      // <IsAuthContext.Provider  value={false}>
       <div className='app-wrapper'>
         <HeaderWrap />
         <Navbar/>
@@ -28,10 +30,11 @@ function App() {
               {/* <Route path={"/music"} render={() => <Music/>} /> */}
               <Route path={"/settings"} render={() => <Settings/>} />
               <Route path={"/users"} render={() => <UsersWrap/>} />
-              <Route path={"/login"} render={() => <LoginWrap/>} />
+              <Route path={"/login"} render={() => <Login/>} />
         </div>
         <Footer/>
       </div>
+      // </IsAuthContext.Provider>
   );
 }
 

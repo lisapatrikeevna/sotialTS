@@ -1,6 +1,6 @@
 type SendMessageAType = ReturnType<typeof sendMessage>
-type ChangeNewMessageAType = ReturnType<typeof changeNewMessage>
-type dialogsActionType = SendMessageAType| ChangeNewMessageAType;
+// type ChangeNewMessageAType = ReturnType<typeof changeNewMessage>
+type dialogsActionType = SendMessageAType;
 type messagesItemType = {
     message: string
     id : number
@@ -29,33 +29,34 @@ let initialState:dialogsInitialStateType={
     messageForNewDialog: '',
 }
 const SEND_MESSAGE = "SEND-MESSAGE";
-const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
-const dialogReducer = ( state=initialState, action:dialogsActionType) => {
+// const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
+const dialogReducer = ( state:dialogsInitialStateType=initialState, action:dialogsActionType) => {
    switch (action.type) {
        case SEND_MESSAGE:
-           const newText: messagesItemType = {
-               id: new Date().getTime(),
-               message: state.messageForNewDialog
-           }
+           // const newText: messagesItemType = {
+           //     id: new Date().getTime(),
+           //     message: state.messageForNewDialog
+           // }
            return {
                ...state,
-               messageForNewDialog : '',
-               messageData: [...state.messageData,newText]
+              // messageForNewDialog : '',
+              // messageData: [...state.messageData,newText]
+               messageData: [...state.messageData,action.value]
            }
-
-       case CHANGE_NEW_MESSAGE:
-           // debugger
-           return {
-               ...state,
-               messageForNewDialog : action.newText,
-           }
+       //
+       // case CHANGE_NEW_MESSAGE:
+       //     // debugger
+       //     return {
+       //         ...state,
+       //         messageForNewDialog : action.newText,
+       //     }
 
        default  :
            return state;
    }
 
 }
-export const sendMessage = () => ({type:SEND_MESSAGE} as const)
-export const changeNewMessage = (message:string) => ({type:CHANGE_NEW_MESSAGE,newText:message }as const)
+export const sendMessage = (value:string) => ({type:SEND_MESSAGE,value} as const)
+// export const changeNewMessage = (message:string) => ({type:CHANGE_NEW_MESSAGE,newText:message }as const)
 
 export default dialogReducer;

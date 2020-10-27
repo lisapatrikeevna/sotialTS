@@ -1,4 +1,5 @@
 import {FollowUserApi, UserApi} from "../common/AsksApi";
+import {Dispatch} from "redux";
 
 type UnfollowACType = ReturnType<typeof unfollowAC>
 type FollowACType = ReturnType<typeof followAC>
@@ -97,7 +98,8 @@ export const followingIsProgressAC = (followingIsProgress:boolean,id:number) => 
 //type Dispatch<S> = Redux.Dispatch<S>;
 export const getUsersTC = (currentPage:number,pagesSize:number)=>{
     // return(dispatch:Dispatch<S>)=>{
-    return(dispatch:any)=>{
+    //import {Dispatch} from "redux";!!!!!!!!!!!!!!!!!!!!!! type Dispatch
+    return(dispatch: Dispatch)=>{
         dispatch(isFetchingAC(true))
         UserApi.getUsers(currentPage,pagesSize)
             .then(response => {
@@ -109,7 +111,7 @@ export const getUsersTC = (currentPage:number,pagesSize:number)=>{
     }
 }
 export const onFollowTC = (id: number) =>{
-    return(dispatch:any)=>{
+    return(dispatch:Dispatch)=>{
         dispatch(followingIsProgressAC(true,id))
         FollowUserApi.follow(id)
             .then(response => {
@@ -119,7 +121,7 @@ export const onFollowTC = (id: number) =>{
     }
 }
 export const onUnFollowTC = (id: number) =>{
-    return(dispatch:any)=>{
+    return(dispatch:Dispatch)=>{
         dispatch(followingIsProgressAC(true,id))
         FollowUserApi.unfollow(id)
             .then(response => {

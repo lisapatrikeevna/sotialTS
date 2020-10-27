@@ -9,7 +9,7 @@ const instans= axios.create({
 })
 export const UserApi={
     getUsers(currentPage=1,pagesSize=10){
-        debugger
+       // debugger
         return  instans.get(`users?page=${currentPage}&count=${pagesSize}`)
             .then(response =>{
                 return response.data
@@ -18,9 +18,10 @@ export const UserApi={
 }
 export const AuthMyApi={
     getMy(){
-        debugger
+
         return  instans.get(`auth/me`)
             .then(response =>{
+              //  debugger
                 return response.data
             })
     }
@@ -28,9 +29,9 @@ export const AuthMyApi={
 export const FollowUserApi={
     getUser(userId:number){
         return  instans.get(`follow/${userId}`)
-            // .then(response =>{
-            //     return response.data
-            // })
+            .then(response =>{
+                return response.data
+            })
     },
 
     unfollow(userId:number){
@@ -44,5 +45,14 @@ export const FollowUserApi={
 export const ProfileUserApi={
     getUser(userId:number){
         return  instans.get(`profile/${userId}`)
+    },
+    updateUserPhoto(){
+        return instans.put(`profile/photo`)
+    },
+    updateStatus(status:string ){
+        return instans.put(`profile/status`,{status:status})
+    },
+    getStatus(userId:number){
+        return instans.get(`profile/status/${userId}`)
     }
 }

@@ -6,6 +6,7 @@ import {RootStateType} from "../redux/ReduxStore";
 import {setAuthMyAC, setAuthMyTC} from "../redux/AuthReducer";
 import {AuthMyApi, ProfileUserApi} from '../common/AsksApi';
 import {photosType} from "./ProfileWrap";
+import {getUserProfileTC} from "../redux/ProfileReducer";
 
 type DispatchStateType = {
     //authMyData: (id: number, email: string, login: string) => void
@@ -38,6 +39,7 @@ class HeaderWrap extends React.Component <MapStateType & DispatchStateType> {
         //         // this.props.toggleIsFetching(false)
         //         this.props.authMyData(response.data);
         //     });
+
 
     }
 

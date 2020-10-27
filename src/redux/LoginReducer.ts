@@ -1,18 +1,15 @@
 import {photosType} from "../components/ProfileWrap";
-import {AuthMyApi, ProfileUserApi} from "../common/AsksApi";
+import {AuthMyApi} from "../common/AsksApi";
 import {Dispatch} from "redux";
-import {setUserProfile} from "./ProfileReducer";
 
 type setAuthMyACType = ReturnType<typeof setAuthMyAC>
-type getAvatarACType = ReturnType<typeof getAvatarAC>
-type ActionType = setAuthMyACType|getAvatarACType;
-export type InitialStateType = {
+type ActionType = setAuthMyACType;
+type InitialStateType = {
     id: number | null
     email: string | null
     login: string | null
     avatar: photosType | null
     aught: boolean
-    captchaUrl?: string | null
 }
 
 let initialState: InitialStateType = {
@@ -21,6 +18,7 @@ let initialState: InitialStateType = {
     login: null,
     avatar: null,
     aught: false
+
 }
 const authReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
@@ -32,12 +30,6 @@ const authReducer = (state: InitialStateType = initialState, action: ActionType)
                 aught: true
             }
         }
-        case 'SET-AVA': {
-            return {
-                ...state,
-                avatar: action.ava
-            }
-        }
         default  :
             return state;
     }
@@ -46,7 +38,7 @@ const authReducer = (state: InitialStateType = initialState, action: ActionType)
 export const setAuthMyAC = (id: number, email: string, login: string) => ({
     type: 'SET-AUTH-MY', data: {id, email, login}
 } as const)
-const getAvatarAC = (id: number, ava: any,)=>({type:'SET-AVA',id,ava}as const)
+
 export const setAuthMyTC = ()=>{
     return(dispatch:Dispatch)=>{
         AuthMyApi.getMy()
@@ -57,12 +49,6 @@ export const setAuthMyTC = ()=>{
                     dispatch(setAuthMyAC(id, email, login))
                 }
             });
-        // ProfileUserApi.getUser(id)
-        //     .then(response=>{
-        //     dispatch(setUserProfile(response.data.data.avatar));
-        //
-        //     }
-        // )
     }
 }
 // window.state:InitialStateType=state:InitialStateType;
