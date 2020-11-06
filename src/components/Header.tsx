@@ -9,6 +9,7 @@ type propsType={
     aught:boolean
     photos:photosType| null
     login: string | null
+    logOutTC:()=>void
 }
 function Header (props:propsType) {
     return (
@@ -22,7 +23,10 @@ function Header (props:propsType) {
             </div>
             <span className="login">
                {props.aught ?
-                   <span><img src={props.photos ? props.photos.large : 'plase for ava'} className='ava' alt="ava"/> <br/>{props.login}</span>
+                   <span>{props.photos?.small ? <img src={ props.photos.small } className='ava' alt="ava"/> :  'please for ava'}
+                       <br/>{props.login}
+                       <br/><button onClick={props.logOutTC}>exit</button>
+                   </span>
                    : <NavLink to={'/login'}>Login</NavLink>
                }
             </span>

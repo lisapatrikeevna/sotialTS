@@ -3,14 +3,14 @@ import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/ReduxStore";
-import {setAuthMyAC, setAuthMyTC} from "../redux/AuthReducer";
-import {AuthMyApi, ProfileUserApi} from '../common/AsksApi';
+import {logOutTC, setAuthMyAC, setAuthMyTC} from "../redux/AuthReducer";
 import {photosType} from "./ProfileWrap";
 import {getUserProfileTC} from "../redux/ProfileReducer";
 
 type DispatchStateType = {
     //authMyData: (id: number, email: string, login: string) => void
-    setAuthMyTC:()=>void
+    setAuthMyTC: () => void
+    logOutTC: () => void
 }
 
 type MapStateType = {
@@ -46,9 +46,10 @@ class HeaderWrap extends React.Component <MapStateType & DispatchStateType> {
     render() {
         return (
             <Header
-               login={this.props.login}
+                login={this.props.login}
                 aught={this.props.aught}
                 photos={this.props.avatar}
+                logOutTC={this.props.logOutTC}
             />
         )
     }
@@ -66,5 +67,8 @@ let mapStateToProps = (state: RootStateType): MapStateType => {
     }
 }
 export default connect
-//<MapStateType, DispatchStateType, {}, RootStateType>
-(mapStateToProps, {setAuthMyTC})(HeaderWrap);
+    //<MapStateType, DispatchStateType, {}, RootStateType>
+    (mapStateToProps, {
+        setAuthMyTC,
+        logOutTC
+    })(HeaderWrap);

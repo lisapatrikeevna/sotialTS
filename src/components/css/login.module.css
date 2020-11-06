@@ -1,0 +1,26 @@
+.d-flex {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+
+.errorForm{
+    color: red;
+    font-size: 20px;
+}
+.input{
+    border-color: #d280f8;
+}
+.loginForm{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 605px;
+    margin: 1em;
+}

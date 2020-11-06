@@ -1,5 +1,5 @@
 import React from 'react';
-import {AddChangePostActionCreator, OnPostChangeActionCreator, postType} from "../../../redux/ProfileReducer";
+import {AddChangePostAC,  postType} from "../../../redux/ProfileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {RootStateType} from "../../../redux/ReduxStore";
@@ -14,6 +14,34 @@ import {Dispatch} from "redux";
 //   // store:any
 // }
 
+
+
+type mapStateToPropsType={
+    posts:Array<postType>
+    message: string
+}
+type mapDispatchToPropsType={
+    addChangePost:(value:string)=>void
+}
+let mapStateToProps = (state: RootStateType):mapStateToPropsType=>{
+    return{
+        posts:state.profile.posts,
+        message:state.profile.messageForNewPost
+    }
+}
+let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
+    return {
+        addChangePost: (value: string) => {
+           // debugger
+            dispatch(AddChangePostAC(value))
+        },
+        // onPostChange: (message:string) => {
+        //     dispatch(OnPostChangeActionCreator(message))
+        // }
+    }
+}
+const MyPostsWrap = connect<mapStateToPropsType,mapDispatchToPropsType,{},RootStateType>(mapStateToProps,mapDispatchToProps)(MyPosts)
+export default MyPostsWrap;
 
 // function MyPostsWrap(props:propsMyPostsType ){
 // let state = props.store.getState();
@@ -34,27 +62,3 @@ import {Dispatch} from "redux";
 // )
 //
 // }
-type mapStateToPropsType={
-    posts:Array<postType>
-}
-type mapDispatchToPropsType={
-    addChangePost:(value:string)=>void
-}
-let mapStateToProps = (state: RootStateType):mapStateToPropsType=>{
-    return{
-        posts:state.profile.posts,
-        //message:state.profile.messageForNewPost
-    }
-}
-let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
-    return {
-        addChangePost: () => {
-            dispatch(AddChangePostActionCreator())
-        },
-        // onPostChange: (message:string) => {
-        //     dispatch(OnPostChangeActionCreator(message))
-        // }
-    }
-}
-const MyPostsWrap = connect<mapStateToPropsType,mapDispatchToPropsType,{},RootStateType>(mapStateToProps,mapDispatchToProps)(MyPosts)
-export default MyPostsWrap;

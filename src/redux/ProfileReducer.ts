@@ -1,7 +1,7 @@
 import {ProfileUserApi} from "../common/AsksApi";
-import {Dispatch} from "redux";
+import {Dispatch, Reducer} from "redux";
 
-type AddChangePostActionType = ReturnType<typeof AddChangePostActionCreator>
+type AddChangePostActionType = ReturnType<typeof AddChangePostAC>
 // type ChangeNewPostTextActionType = ReturnType<typeof OnPostChangeActionCreator>
 type setUserProfile = ReturnType<typeof setUserProfile>
 type setUserStatus = ReturnType<typeof setUserStatus>
@@ -10,8 +10,9 @@ type dispatchActionType = AddChangePostActionType | setUserProfile | setUserStat
 
 
 type profileInitialStateType = {
+    messageForNewPost: string;
     posts: Array<postType>
-    messageForNewPost: string
+    //messageForNewPost: string
     profile: number|null
     status: string
 }
@@ -37,7 +38,7 @@ const ADD_CHANGE_POST = "ADD-CHANGE-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
-const profileReducer = (state: profileInitialStateType = initialState, action: dispatchActionType): profileInitialStateType => {
+const profileReducer: Reducer<profileInitialStateType,dispatchActionType> = (state = initialState, action): profileInitialStateType => {
     switch (action.type) {
         case ADD_CHANGE_POST:
             const newPost: postType = {
@@ -47,7 +48,7 @@ const profileReducer = (state: profileInitialStateType = initialState, action: d
             }
             return {
                 ...state,
-                messageForNewPost: '',
+               // messageForNewPost: '',
                 posts: [...state.posts, newPost]
             };
 
@@ -72,7 +73,7 @@ const profileReducer = (state: profileInitialStateType = initialState, action: d
             return state;
     }
 }
-export const AddChangePostActionCreator = (value:string) => ({type: ADD_CHANGE_POST,value} as const)
+export const AddChangePostAC = (value:string) => ({type: ADD_CHANGE_POST,value} as const)
 // export const OnPostChangeActionCreator = (newText: string) => ({type: CHANGE_NEW_POST_TEXT, message: newText} as const)
 export const setUserProfile = (profile: number) => ({type: SET_USER_PROFILE, profile} as const)
 export const setUserStatus = (status: string) => ({type: SET_STATUS, status} as const)
@@ -100,7 +101,7 @@ export const getUserStatusTC = (userId:string) =>{
 }
 export const updateUserStatusTC = (status:string) =>{
     return(dispatch:Dispatch)=>{
-        debugger
+        //debugger
         ProfileUserApi.updateStatus(status)
             .then(response => {
                 debugger
