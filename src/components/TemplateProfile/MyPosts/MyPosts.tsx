@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import cl from './MyPost.module.css';
 import Post from './Post';
 import {postType} from "../../../redux/ProfileReducer";
@@ -36,7 +36,6 @@ function MyPosts(props: propsMyPostsType) {
         <div className={cl.post}>
             <h2>My Posts</h2>
             {/*<div className={cl.sendMessage}>*/}
-            {/*   <p>write new post:</p> */}
             {/*  <textarea  value={props.message}  onChange={onPostChange} placeholder={"write your message"}/>*/}
             {/*   <button  className={cl.btnAddet} onClick={addPost}>Add post</button>*/}
             {/*</div>*/}

@@ -56,24 +56,11 @@ export type DataType = {
 
 export class UsersContainer extends React.Component<propsType> {
     componentDidMount() {
-        // this.props.toggleIsFetching(true)
-        // UserApi.getUsers(this.props.currentPage,this.props.pagesSize)
-        //     .then(response => {
-        //         this.props.toggleIsFetching(false)
-        //         this.props.setUsers(response.items);
-        //         this.props.setTotalUsers(response.totalCount);
-        //     });
+        //debugger
         this.props.getUsersTC(this.props.currentPage,this.props.pagesSize)
     }
 
     onPageChanged = (currentPage: number) => {
-        // this.props.toggleIsFetching(true)
-        // this.props.setCurrentPage(currentPage)
-        // UserApi.getUsers(currentPage, this.props.pagesSize)
-        //     .then(response => {
-        //         this.props.toggleIsFetching(false)
-        //         this.props.setUsers(response.items);
-        //     });
         this.props.getUsersTC(currentPage,this.props.pagesSize)
     }
 

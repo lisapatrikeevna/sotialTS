@@ -11,7 +11,7 @@ import cl from './css/login.module.css'
 type FormDataType = {
     // aught:boolean
     // photos:photosType| null
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -41,7 +41,7 @@ function Login(props:loginPropsType) {
     const onSubmit = (formData: FormDataType) => {
          //debugger
         console.log(formData)
-        props.loginTC(formData.login,formData.password,formData.rememberMe)
+        props.loginTC(formData.email,formData.password,formData.rememberMe)
     }
     if (props.aught) {
        return <Redirect to={'/profile'}/>

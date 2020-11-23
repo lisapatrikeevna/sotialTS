@@ -101,6 +101,7 @@ export const getUsersTC = (currentPage:number,pagesSize:number)=>{
     //import {Dispatch} from "redux";!!!!!!!!!!!!!!!!!!!!!! type Dispatch
     return(dispatch: Dispatch)=>{
         dispatch(isFetchingAC(true))
+        dispatch(setCurrentPageAC(currentPage))
         UserApi.getUsers(currentPage,pagesSize)
             .then(response => {
                 dispatch(isFetchingAC(false));

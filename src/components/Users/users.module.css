@@ -24,6 +24,10 @@
 }
 .currentPage{
     font-weight: bold;
+    margin: 0 5px;
+}
+.currentPage:hover, .ollPage:hover{
+    cursor: pointer;
 }
 .ollPage{
     font-weight: normal;

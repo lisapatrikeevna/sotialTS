@@ -29,14 +29,7 @@ const Profile = (props: ProfilePropsType) => {
           <ProfileInfo
               profile={props.profile} status={props.status} updateStatus={props.updateUserStatusTC}
           />
-          <MyPostsWrap
-              // store={props.store}
-          // post={props.profile.post}
-          // message={props.profile.messageForNewPost}
-          // addChangePost={props.addChangePost}
-          // onPostChange={props.changeNewPostText}
-          // dispatch={props.dispatch}
-          />
+          <MyPostsWrap />
         </div>
       </section>
     );

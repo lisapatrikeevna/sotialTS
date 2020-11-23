@@ -9,11 +9,11 @@ import {IsLoginRedirect} from '../common/lsLoginHOC';
 
 export type propsType = {
     profile: AxiosGetType
-    //setUserProfile:(profile:AxiosGetType)=>void
     getUserProfileTC: (userID: string) => void
     getUserStatusTC: (userID: string) => void
     updateUserStatusTC: (status: string) => void
     status: string
+    autorizUserID:string
 }
 type TRouteParams = {
     userID: string // since it route params
@@ -43,17 +43,14 @@ export type photosType = {
 
 export class ProfileWrap extends React.Component<propsType & RouteComponentProps<TRouteParams>> {
     componentDidMount() {
-        // this.props.match.params.userId(true)
-        //debugger
         let userID = this.props.match.params.userID;
         if (!userID) {
-            userID = '11446';
+            userID = this.props.autorizUserID;
+            // userID = '11446';
+            if (!userID){
+                this.props.history.push('/login')
+            }
         }
-        // ProfileUserApi.getUser(+userID)
-        //     .then(response => {
-        //         // this.props.toggleIsFetching(false)
-        //         this.props.setUserProfile(response.data);
-        //     });
         this.props.getUserProfileTC(userID)
         this.props.getUserStatusTC(userID)
         //this.props.getUserStatusTC(status)
@@ -74,7 +71,8 @@ export class ProfileWrap extends React.Component<propsType & RouteComponentProps
 let mapStateToProps = (state: RootStateType) => {
     return {
         profile: state.profile.profile,
-        status: state.profile.status
+        status: state.profile.status,
+        autorizUserID: state.auth.id
     }
 }
 // let withRouterProfileContainer = withRouter(ProfileWrap);

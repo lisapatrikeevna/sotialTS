@@ -90,9 +90,9 @@ export const Users = (props: propsType) => {
                 }
             </div>
             <div>
-                {pages.map(p => {
-                    return <span className={props.currentPage ? cl.ollPage : cl.currentPage}
-                                 onClick={(e) => {props.onPageChanged(p) } }>-{p}</span>
+                {pages.map(p => {return <span className={p===props.currentPage ?  cl.currentPage : cl.ollPage}
+                                 onClick={(e) => {props.onPageChanged(p) } }>
+                        -{p}</span>
                 })}
             </div>
         </>

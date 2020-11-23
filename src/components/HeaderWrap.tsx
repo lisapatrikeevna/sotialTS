@@ -1,15 +1,13 @@
 import React from 'react';
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/ReduxStore";
-import {logOutTC, setAuthMyAC, setAuthMyTC} from "../redux/AuthReducer";
+import {logOutTC} from "../redux/AuthReducer";
 import {photosType} from "./ProfileWrap";
 import {getUserProfileTC} from "../redux/ProfileReducer";
 
 type DispatchStateType = {
-    //authMyData: (id: number, email: string, login: string) => void
-    setAuthMyTC: () => void
+    // setAuthMyTC: () => void
     logOutTC: () => void
 }
 
@@ -23,25 +21,25 @@ type MapStateType = {
 
 
 class HeaderWrap extends React.Component <MapStateType & DispatchStateType> {
-    componentDidMount() {
-        // AuthMyApi.getMy()
-        //     .then(response => {
-        //         if (response.resultCode === 0) {
-        //             debugger
-        //             let {id, email, login} = response.data
-        //             this.props.authMyData(id, email, login)
-        //         }
-        //       //  let userId=response.data.data.id
-        //     });
-        this.props.setAuthMyTC()
-        // ProfileUserApi.getUser(+userId)
-        //     .then(response => {
-        //         // this.props.toggleIsFetching(false)
-        //         this.props.authMyData(response.data);
-        //     });
-
-
-    }
+    // componentDidMount() {
+    //     // AuthMyApi.getMy()
+    //     //     .then(response => {
+    //     //         if (response.resultCode === 0) {
+    //     //             debugger
+    //     //             let {id, email, login} = response.data
+    //     //             this.props.authMyData(id, email, login)
+    //     //         }
+    //     //       //  let userId=response.data.data.id
+    //     //     });
+    //     this.props.setAuthMyTC()
+    //     // ProfileUserApi.getUser(+userId)
+    //     //     .then(response => {
+    //     //         // this.props.toggleIsFetching(false)
+    //     //         this.props.authMyData(response.data);
+    //     //     });
+    //
+    //
+    // }
 
     render() {
         return (
@@ -69,6 +67,6 @@ let mapStateToProps = (state: RootStateType): MapStateType => {
 export default connect
     //<MapStateType, DispatchStateType, {}, RootStateType>
     (mapStateToProps, {
-        setAuthMyTC,
+        // setAuthMyTC,
         logOutTC
     })(HeaderWrap);

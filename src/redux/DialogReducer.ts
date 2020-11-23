@@ -12,7 +12,6 @@ export type dialogsItemType = {
 export type dialogsInitialStateType = {
     dialogItem:Array<dialogsItemType>
     messageData: Array<messagesItemType>
-  //  messageForNewDialog:string
 }
 
 let initialState:dialogsInitialStateType={
@@ -40,11 +39,9 @@ const dialogReducer = ( state:dialogsInitialStateType=initialState, action:dialo
            }
            return {
                ...state,
-               // messageForNewDialog : '',
                 messageData: [...state.messageData,newText]
-               // messageData: [...state.messageData, action.value]
            }
-           debugger
+          // debugger
        }
        //
        // case CHANGE_NEW_MESSAGE:
@@ -60,6 +57,6 @@ const dialogReducer = ( state:dialogsInitialStateType=initialState, action:dialo
 
 }
 export const sendMessageAC = (value:string) => ({type:SEND_MESSAGE,value} as const)
-// export const changeNewMessage = (message:string) => ({type:CHANGE_NEW_MESSAGE,newText:message }as const)
+
 
 export default dialogReducer;

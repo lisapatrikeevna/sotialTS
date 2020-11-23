@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/ReduxStore";
 import {loginTC} from "../redux/AuthReducer";
@@ -26,8 +24,6 @@ class LoginWrap extends React.Component <MapStateType & DispatchStateType> {
     render() {
         return (
             <Login
-                // login={this.props.login}
-                //  aught={this.props.aught}
                 //  photos={this.props.avatar}
                 loginTC={this.props.loginTC}
                 aught={this.props.aught}
