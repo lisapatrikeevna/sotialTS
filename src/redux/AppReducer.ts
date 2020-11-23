@@ -27,7 +27,12 @@ const appReducer = (state: InitialStateType = initialState, action: ActionType):
 export const setInitialAC = () => ({type: 'SET-INITIAL'} as const);
 export const setInitialTC = () => (dispatch: Dispatch<any>) => {
     let promise = dispatch(setAuthMyTC());
-    Promise.all([promise]).then(()=>{
+    Promise.all([promise
+        
+        
+        
+        
+    ]).then(()=>{
         dispatch(setInitialAC());
     })
 
