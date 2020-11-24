@@ -17,6 +17,7 @@ const MyPosts=React.memo((props: propsMyPostsType)=> {
         return <Post key={d.id} id={d.id} message={d.message} likesCount={d.likesCount}/>
     });
 
+
     // const addPost = ()=>{
     //     props.addChangePost();
     // };
