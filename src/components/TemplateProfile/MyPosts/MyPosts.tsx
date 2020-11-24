@@ -7,14 +7,12 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type propsMyPostsType = {
     posts: Array<postType>
-    //message: string
     addChangePost: (value: string) => void
-    // onPostChange: (message:string) => void
 }
 
 
-function MyPosts(props: propsMyPostsType) {
-
+ //const MyPosts=(props: propsMyPostsType)=> {
+const MyPosts=React.memo((props: propsMyPostsType)=> {
     let postsElement = props.posts.map(d => {
         return <Post key={d.id} id={d.id} message={d.message} likesCount={d.likesCount}/>
     });
@@ -45,7 +43,7 @@ function MyPosts(props: propsMyPostsType) {
             </div>
         </div>
     )
-}
+})
 
 export default MyPosts;
 type  FormDataType = {

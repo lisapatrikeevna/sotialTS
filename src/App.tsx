@@ -22,7 +22,11 @@ type DispatchStateType = {
     setInitialTC: () => void
 }
 
-class App extends React.Component <MapStateType & DispatchStateType> {
+type OwnProps = {
+
+}
+
+class App extends React.Component <MapStateType & DispatchStateType & OwnProps> {
     componentDidMount() {
         this.props.setInitialTC()
     }
@@ -55,8 +59,8 @@ class App extends React.Component <MapStateType & DispatchStateType> {
 const mapStateToProps = (state: RootStateType): MapStateType => ({
     initial: state.app.initial
 })
-export default compose(
+export default compose<React.ComponentClass>(
     withRouter,
-    connect(mapStateToProps, {
+    connect<MapStateType, DispatchStateType, OwnProps,RootStateType >(mapStateToProps, {
         setInitialTC,
     }))(App);

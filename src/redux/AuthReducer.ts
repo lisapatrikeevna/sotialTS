@@ -53,7 +53,6 @@ export const setAuthMyTC = () => {
         AuthMyApi.getMy()
             .then(response => {
                 if (response.resultCode === 0) {
-                    //  debugger
                     let {id, email, login} = response.data
                     dispatch(setAuthMyAC(id, email, login,true))
                     // ProfileUserApi.getUser(id)

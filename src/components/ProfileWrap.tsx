@@ -46,13 +46,13 @@ export class ProfileWrap extends React.Component<propsType & RouteComponentProps
         let userID = this.props.match.params.userID;
         if (!userID) {
             userID = this.props.autorizUserID;
-            // userID = '11446';
+            //userID = '11446';
             if (!userID){
-                this.props.history.push('/login')
+                this.props.history.push('/login');
             }
         }
-        this.props.getUserProfileTC(userID)
-        this.props.getUserStatusTC(userID)
+        this.props.getUserProfileTC(userID);
+        this.props.getUserStatusTC(userID);
         //this.props.getUserStatusTC(status)
     }
 

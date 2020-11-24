@@ -5,8 +5,9 @@ type AddChangePostActionType = ReturnType<typeof AddChangePostAC>
 // type ChangeNewPostTextActionType = ReturnType<typeof OnPostChangeActionCreator>
 type setUserProfile = ReturnType<typeof setUserProfile>
 type setUserStatus = ReturnType<typeof setUserStatus>
+type DeletePostType = ReturnType<typeof DeletePostAC>
 
-type dispatchActionType = AddChangePostActionType | setUserProfile | setUserStatus;
+type dispatchActionType = AddChangePostActionType | setUserProfile | setUserStatus|DeletePostType;
 
 
 type profileInitialStateType = {
@@ -52,11 +53,12 @@ const profileReducer: Reducer<profileInitialStateType,dispatchActionType> = (sta
                 posts: [...state.posts, newPost]
             };
 
-        // case CHANGE_NEW_POST_TEXT:
-        //     return {
-        //         ...state,
-        //         messageForNewPost: action.message
-        //     };
+        case "DELETE_POST":
+            let newListPost= state.posts.filter(p=> p.id!=action.id)
+            return {
+                ...state,
+                posts: newListPost
+            };
 
         case SET_USER_PROFILE:
             return {
@@ -74,6 +76,7 @@ const profileReducer: Reducer<profileInitialStateType,dispatchActionType> = (sta
     }
 }
 export const AddChangePostAC = (value:string) => ({type: ADD_CHANGE_POST,value} as const)
+export const DeletePostAC = (id:number) => ({type: "DELETE_POST",id} as const)
 // export const OnPostChangeActionCreator = (newText: string) => ({type: CHANGE_NEW_POST_TEXT, message: newText} as const)
 export const setUserProfile = (profile: number) => ({type: SET_USER_PROFILE, profile} as const)
 export const setUserStatus = (status: string) => ({type: SET_STATUS, status} as const)
