@@ -1,32 +1,43 @@
 import React from 'react';
-import './css/Header.css';
-import logo from '../assets/img/undraw_reminder_pa79.png'
+import cl from './css/Header.module.css';
+import style from  './TemplateSettings/ThemeChange.module.css';
+import logo from '../assets/img/undraw_reminder_pa79.png';
+import defoultAva from '../assets/img/undraw_mobile_web_2g8b.png';
 import btnImg from '../assets/img/search.png'
 import {NavLink} from "react-router-dom";
-import { photosType } from './ProfileWrap';
+import {photosType} from './ProfileWrap';
+import {themType} from "../redux/AppReducer";
 
-type propsType={
-    aught:boolean
-    photos:photosType| null
+type propsType = {
+    aught: boolean
+    photos: photosType | null
     login: string | null
-    logOutTC:()=>void
+    logOutTC: () => void
+    theme:themType
 }
-function Header (props:propsType) {
+
+function Header(props: propsType) {
     return (
-        <header className='header'>
-            <a href='http://webstydio.lisa15.ru/#bottom-content'> 
+        <header className={`${cl.header} ${style[props.theme]}`}>
+            <a href='http://webstydio.lisa15.ru/#bottom-content'>
                 <img src={logo} className='poolLeft'/>
             </a>
-            <div className="wrap">
+            <div className={cl.wrap}>
                 <input type="text"/>
-                <button className="btnImg"><img src={btnImg} alt=""/></button>
+                <button className={cl.btnImg}><img src={btnImg} alt=""/></button>
             </div>
-            <span className="login">
+            <span className={cl.login}>
                {props.aught ?
-                   <span>{props.photos?.small ? <img src={ props.photos.small } className='ava' alt="ava"/> :  'please for ava'}
-                       <br/>{props.login}
-                       <br/><button onClick={props.logOutTC}>exit</button>
-                   </span>
+                   // <span>{props.photos?.small ? <img src={ props.photos.small } className={cl.ava} alt="ava"/> :  'please for ava'}
+                   <div className={cl.dFlex}>{props.photos?.small ?
+                       <img src={props.photos.small} className={cl.ava} alt="ava"/> :
+                       <img src={defoultAva} alt="defoultAva" className={cl.ava}/>}
+                       <div>
+                           {props.login}
+                           <br/>
+                           <button onClick={props.logOutTC}>exit</button>
+                       </div>
+                   </div>
                    : <NavLink to={'/login'}>Login</NavLink>
                }
             </span>

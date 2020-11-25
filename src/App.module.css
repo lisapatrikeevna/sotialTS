@@ -10,10 +10,10 @@ h1,h2,h3 { font-weight: bold; }
 .poolLeft{
   justify-content: start;
 }
-.d-flex{
-  display: flex;
-}
-.app-wrapper{
+/*.d-flex{*/
+/*  display: flex;*/
+/*}*/
+.appWrapper{
   display: grid;
   
   grid-template-areas: 
@@ -41,6 +41,6 @@ ul.poolRight{
   width: 100%;
   /* padding: 20px 30px; */
 }
-.app-wrapper-content{
+.appWrapperContent{
   background: #d280f8;
 }

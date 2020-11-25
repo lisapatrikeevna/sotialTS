@@ -5,6 +5,7 @@ import {RootStateType} from "../redux/ReduxStore";
 import {logOutTC} from "../redux/AuthReducer";
 import {photosType} from "./ProfileWrap";
 import {getUserProfileTC} from "../redux/ProfileReducer";
+import { themType } from '../redux/AppReducer';
 
 type DispatchStateType = {
     // setAuthMyTC: () => void
@@ -17,6 +18,7 @@ type MapStateType = {
     id: number | null
     email: string | null
     login: string | null
+    theme: themType
 }
 
 
@@ -48,6 +50,7 @@ class HeaderWrap extends React.Component <MapStateType & DispatchStateType> {
                 aught={this.props.aught}
                 photos={this.props.avatar}
                 logOutTC={this.props.logOutTC}
+                theme={this.props.theme}
             />
         )
     }
@@ -62,6 +65,7 @@ let mapStateToProps = (state: RootStateType): MapStateType => {
         login: state.auth.login,
         avatar: state.auth.avatar,
         aught: state.auth.aught,
+        theme: state.app.theme,
     }
 }
 export default connect

@@ -18,7 +18,7 @@ export type ProfilePropsType = {
 const Profile = (props: ProfilePropsType) => {
   // debugger
     return(
-      <section className = 'content d-flex'>
+      <section className = 'content'>
         <div>
           <div className = {cl.main__image}>
             <img src={mainImage} className={cl.baner}/>

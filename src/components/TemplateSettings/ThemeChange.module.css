@@ -1,0 +1,51 @@
+.dark {
+    background: #0e0d0e!important;
+}
+.darkBody {
+    background: #5f5b5f!important;
+    color: white;
+}
+.darkMenu {
+    background: #2b282b!important;
+}
+
+
+.light {
+    background: #e8e2e8!important;
+    color: red;
+}
+.lightBody {
+    background: #ffffff!important;
+    color: red;
+}
+.lightMenu {
+    background: #e8e2e8!important;
+}
+.lightMenu .menuItem > a {
+    color: #272727;
+}
+.lightMenu .menuItem a.active {
+    color: #272727;
+}
+
+
+.blue {
+    background: #4f4c82!important;
+}
+.blueBody {
+    background: #9c99d0!important;
+}
+.blueMenu {
+    background: #7f7cb9!important;
+}
+
+.red {
+    background: #bd1b1b!important;
+}
+.redBody {
+    background: #d21b1b!important;
+}
+
+.redMenu {
+    background: #8a0606!important;
+}

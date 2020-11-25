@@ -4,12 +4,12 @@
     /* margin-right: 10px; */
     background: #a054c9;
 }
-.menu__item{
+.menuItem{
     display: flex;
     line-height: 70px;
     padding: 5px 0;
 }
-.menu__item>a{
+.menuItem>a{
     font-size: 18px;
     color: #fff;
     font-weight: bold;
@@ -17,10 +17,10 @@
     text-decoration: none;
     padding-left: 5px;
 }
-.menu__item img{
+.menuItem img{
     width: 60px;
 }
-.menu__item a.active{
+.menuItem a.active{
     color: #69268d;
     text-decoration: none;
 }

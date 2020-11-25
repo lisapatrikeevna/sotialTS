@@ -31,7 +31,7 @@ function ProfileInfo(props: propsType) {
     ]
     // debugger
     return (
-        <div style={{width:'50%'}}>
+        <div className={cl.profileInfo} style={{width:'80%'}}>
             <div className={cl.avaDesc}>
                 {/*<img src={imgAvatar} className={cl.ava} alt="ava"/>*/}
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>

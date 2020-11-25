@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import cl from './AccordonStyle.module.css'
 
 type AccordionType = {
     items: Array<itemType>
@@ -9,12 +10,12 @@ export function Accordion(props: AccordionType) {
     let [collapsed, setCollapsed] = useState(true)
 
     return (
-        <>
+        <div className={cl.parent}>
             <AccordionTitle title={props.titleValue} onClickHandler={() => {
                 setCollapsed(!collapsed)
             }}/>
             {!collapsed && <AccordionBody items={props.items}/>}
-        </>
+        </div>
     )
 }
 
@@ -40,10 +41,11 @@ export type AccordionBodyType = {
     items: Array<itemType>
 }
 export function AccordionBody(props: AccordionBodyType) {
-    return <div style={{position:"absolute"}}>
+    // return <ul style={{position:"absolute"}}>
+    return <ul className={ `${cl.wrapList}`}>
         {props.items.map(i => {
-            return <li key={i.id}><a href={i.link}>{i.name}:{i.desk} </a></li>
+            return <li className={cl.itemList} key={i.id}><a href={i.link}>{i.name}:{i.desk} </a></li>
         })}
-    </div>
+    </ul>
 
 }

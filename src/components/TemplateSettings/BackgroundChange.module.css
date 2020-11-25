@@ -1,0 +1,26 @@
+.dFlex {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+.img {
+    width: 28%;
+    margin: 1%;
+}
+.img img{
+    width: 100%;
+}
+.bgGray{
+    background: url("./../../assets/img/bg/bg1.jpeg") center top/cover;
+}
+.bgCrazy{
+    background: url("./../../assets/img/bg/bg2.jpg") center top/cover;
+}
+.bgGrin{
+    background: url("./../../assets/img/bg/bg3.jpg") center top/cover;
+}
+.bgRain{
+    background: url("./../../assets/img/bg/bg4.jpg") center top/cover;
+}

@@ -1,9 +1,5 @@
 import React from 'react';
-import './css/Header.css';
-import logo from '../assets/img/undraw_reminder_pa79.png'
-import btnImg from '../assets/img/search.png'
-import {NavLink, Redirect} from "react-router-dom";
-import {photosType} from './ProfileWrap';
+import { Redirect} from "react-router-dom";
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {renderCheckbox, renderTextField} from '../common/FormControl/FormControl';
 import {validate} from "../expansive/validate";
