@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import {MapDispatchToPropsType, MapStateToPropsType} from './UsersWrap';
 import {FollowUserApi} from "../../common/AsksApi";
 import {onUnFollowTC, userItemType} from "../../redux/UsersReducer";
+import {Pagination} from "../../common/pagination/Pagination";
 
 type propsType = {
     users: Array<userItemType>
@@ -22,37 +23,20 @@ type propsType = {
 //     onPageChanged: (currentPage: number) => void
 // }
 export const Users = (props: propsType) => {
-
-    let countPages = Math.ceil(props.countUsers / props.pagesSize);
-    let pages = [];
-    for (let i = 1; i <= countPages; i++) {
-        pages.push(i);
-    }
+    //
+    // let countPages = Math.ceil(props.countUsers / props.pagesSize);
+    // let pages = [];
+    // for (let i = 1; i <= countPages; i++) {
+    //     pages.push(i);
+    // }
     return (
         <>
-
             <div className={cl.usersWrap}>
                 {props.users.map(u => {
                     const changeFollow = () => {
-                        // props.toggleFollowingIsProgress(true,u.id)
-                        // FollowUserApi.follow(u.id)
-                        //     .then(response => {
-                        //        if(response.data.resultCode===0){
-                        //            props.follow(u.id)
-                        //        }
-                        //         props.toggleFollowingIsProgress(false,u.id)
-                        //     });
                         props.onFollowTC(u.id)
                     }
                     const changeUnFollow = () => {
-                        // props.toggleFollowingIsProgress(true,u.id)
-                        // FollowUserApi.unfollow(u.id)
-                        //     .then(response => {
-                        //         if(response.data.resultCode===0){
-                        //             props.unfollow(u.id)
-                        //         }
-                        //         props.toggleFollowingIsProgress(false,u.id)
-                        //     });
                         props.onUnFollowTC(u.id)
                     }
                     return (
@@ -89,12 +73,8 @@ export const Users = (props: propsType) => {
                 })
                 }
             </div>
-            <div>
-                {pages.map(p => {return <span className={p===props.currentPage ?  cl.currentPage : cl.ollPage}
-                                 onClick={(e) => {props.onPageChanged(p) } }>
-                        -{p}</span>
-                })}
-            </div>
+            <Pagination currentPage={props.currentPage} countItems={props.countUsers} onPageChanged={props.onPageChanged}
+            pagesSize={props.pagesSize}/>
         </>
     )
 }

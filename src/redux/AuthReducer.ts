@@ -68,16 +68,12 @@ export const setAuthMyTC = () => {
 }
 export const loginTC = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: Dispatch<any>) => {
-        //debugger
         AuthMyApi.login(email, password, rememberMe)
             .then(response => {
-               // debugger
                 if (response.resultCode === 0) {
-                   // debugger
                     dispatch(setAuthMyTC())
                 }else{
-                    debugger
-                    console.log(response.messages);
+                   // console.log(response.messages);
                     dispatch(stopSubmit('login',{ _error:response.messages}))
                 }
             })
@@ -88,7 +84,7 @@ export const logOutTC = () => {
     return (dispatch: Dispatch) => {
         AuthMyApi.logout().then(response => {
             if (response.resultCode === 0) {
-                console.log(response.data)
+              //  console.log(response.data)
                dispatch(setAuthMyAC(null, null, null,false))
             }
         })

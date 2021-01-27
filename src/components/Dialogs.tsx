@@ -7,8 +7,7 @@ import usersImg from '../assets/img/undraw_data_processing_yrrv.png';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLength, minLength, requiredFields} from "../expansive/validate";
 import {renderTextField, Textarea} from "../common/FormControl/FormControl";
-//import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+
 
 export type DialogsPropsType = {
     dialogs: dialogsInitialStateType

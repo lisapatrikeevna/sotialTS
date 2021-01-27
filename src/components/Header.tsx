@@ -17,6 +17,7 @@ type propsType = {
 }
 
 function Header(props: propsType) {
+    // debugger
     return (
         <header className={`${cl.header} ${style[props.theme]}`}>
             <a href='http://webstydio.lisa15.ru/#bottom-content'>

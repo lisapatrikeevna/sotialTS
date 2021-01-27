@@ -11,12 +11,12 @@ export const ProfileStatus = (props: propsType) => {
     useEffect(()=>{
         setValue(props.status)
     },[props.status])
+    
     const onEditMode = () => {
         setEditMode(true)
     }
 
     const offEditMode = () => {
-        debugger
         setEditMode(false)
         props.updateStatus(value)
     }
@@ -29,9 +29,7 @@ export const ProfileStatus = (props: propsType) => {
         <div>
             {!editMode ?
                 <span onDoubleClick={onEditMode}>
-                    {/*{props.status === '' && 'dont have status'}*/}
                     {props.status || 'dont have status'}
-                    {/*{this.props.status}*/}
                  </span>  :
                 <input value={value} autoFocus
                        onChange={onChangeStatus}

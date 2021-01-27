@@ -22,5 +22,7 @@
     background: url("./../../assets/img/bg/bg3.jpg") center top/cover;
 }
 .bgRain{
-    background: url("./../../assets/img/bg/bg4.jpg") center top/cover;
+    background-image: url("./../../assets/img/bg/bg4.jpg");
+    background-size: cover;
+    background-position: center top;
 }

@@ -20,7 +20,7 @@ export type NavbarType = {
 function Navbar () {
     const theme = useSelector<RootStateType,themType>(state => state.app.theme);
     return(
-    <nav className={`${cl.menu} ${style[theme+'Menu']}`}>
+    <nav className={`${cl.menu} ${style[theme+'Menu']}`} >
       <ul>
         <li className={`${cl.menuItem} ${cl.active}`}><img src={profile} alt="profile"/><NavLink to='/profile'>Blog</NavLink></li>
         <li className={`${cl.menuItem}`}><img src={dialogs} alt="dialogs"/><NavLink to='/dialogs'>Messages</NavLink></li>

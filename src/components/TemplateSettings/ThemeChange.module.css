@@ -2,20 +2,27 @@
     background: #0e0d0e!important;
 }
 .darkBody {
-    background: #5f5b5f!important;
+    background: #5f5b5f;
     color: white;
 }
 .darkMenu {
     background: #2b282b!important;
 }
+.darkPag .currentPage{
+    background-color: #fff;
+    color: #b260dd;
+}
+.darkPag .ollPage{
+    background-color: #b260dd;
+    color: #fff;
+}
 
 
 .light {
     background: #e8e2e8!important;
-    color: red;
 }
 .lightBody {
-    background: #ffffff!important;
+    background: #ffffff;
     color: red;
 }
 .lightMenu {
@@ -27,25 +34,51 @@
 .lightMenu .menuItem a.active {
     color: #272727;
 }
+.lightPag .currentPage{
+    background-color: #fff;
+    color: #b260dd;
+}
+.lightPag .ollPage{
+    background-color: #b260dd;
+    color: #fff;
+}
+
 
 
 .blue {
     background: #4f4c82!important;
 }
 .blueBody {
-    background: #9c99d0!important;
+    background: #9c99d0;
 }
 .blueMenu {
     background: #7f7cb9!important;
 }
+.bluePag .currentPage{
+    background-color: #fff;
+    color: #b260dd;
+}
+.bluePag .ollPage{
+    background-color: #b260dd;
+    color: #fff;
+}
+
 
 .red {
     background: #bd1b1b!important;
 }
 .redBody {
-    background: #d21b1b!important;
+    background: #d21b1b;
 }
-
 .redMenu {
     background: #8a0606!important;
+}
+/*.redPag{*/
+/*    color: red;*/
+/*}*/
+.redPag.currentPage{
+    color: #8a0606!important;
+}
+.redPag .ollPage{
+    background-color: #8a0606!important;
 }
