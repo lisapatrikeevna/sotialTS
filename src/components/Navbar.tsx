@@ -22,12 +22,12 @@ function Navbar () {
     return(
     <nav className={`${cl.menu} ${style[theme+'Menu']}`} >
       <ul>
+          <li className={`${cl.menuItem}`}><img src={users} alt="users"/><NavLink to='/users'>Users</NavLink></li>
         <li className={`${cl.menuItem} ${cl.active}`}><img src={profile} alt="profile"/><NavLink to='/profile'>Blog</NavLink></li>
         <li className={`${cl.menuItem}`}><img src={dialogs} alt="dialogs"/><NavLink to='/dialogs'>Messages</NavLink></li>
         <li className={`${cl.menuItem}`}><img src={news} alt="news"/><NavLink to='/news'>News</NavLink></li>
         <li className={`${cl.menuItem}`}><img src={music} alt="music"/><NavLink to='/music'>Music</NavLink></li>
         <li className={`${cl.menuItem}`}><img src={settings} alt="settings"/><NavLink to='/settings'>Settings</NavLink></li>
-        <li className={`${cl.menuItem}`}><img src={users} alt="users"/><NavLink to='/users'>Users</NavLink></li>
       </ul>
     </nav>
     )

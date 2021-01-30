@@ -17,18 +17,8 @@ const MyPosts=React.memo((props: propsMyPostsType)=> {
         return <Post key={d.id} id={d.id} message={d.message} likesCount={d.likesCount}/>
     });
 
-
-    // const addPost = ()=>{
-    //     props.addChangePost();
-    // };
-    // const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>)=>{
-    //   let message = e.currentTarget.value;
-    //   props.onPostChange(message);
-    // }
     const onSubmit = (value: FormDataType) => {
-        // debugger
         console.log(value)
-        // alert(value)
         props.addChangePost(value.post);
     }
     return (

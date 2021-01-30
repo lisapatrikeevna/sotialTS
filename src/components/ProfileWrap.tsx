@@ -13,7 +13,7 @@ export type propsType = {
     getUserStatusTC: (userID: string) => void
     updateUserStatusTC: (status: string) => void
     status: string
-    autorizUserID:string
+    authorizedUserID:string
 }
 type TRouteParams = {
     userID: string // since it route params
@@ -45,7 +45,7 @@ export class ProfileWrap extends React.Component<propsType & RouteComponentProps
     componentDidMount() {
         let userID = this.props.match.params.userID;
         if (!userID) {
-            userID = this.props.autorizUserID;
+            userID = this.props.authorizedUserID;
             //userID = '11446';
             if (!userID){
                 this.props.history.push('/login');
@@ -53,7 +53,6 @@ export class ProfileWrap extends React.Component<propsType & RouteComponentProps
         }
         this.props.getUserProfileTC(userID);
         this.props.getUserStatusTC(userID);
-        //this.props.getUserStatusTC(status)
     }
 
     render() {
@@ -72,7 +71,7 @@ let mapStateToProps = (state: RootStateType) => {
     return {
         profile: state.profile.profile,
         status: state.profile.status,
-        autorizUserID: state.auth.id
+        authorizedUserID: state.auth.id
     }
 }
 // let withRouterProfileContainer = withRouter(ProfileWrap);

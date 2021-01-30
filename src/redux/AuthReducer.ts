@@ -77,7 +77,6 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
                     dispatch(stopSubmit('login',{ _error:response.messages}))
                 }
             })
-
     }
 }
 export const logOutTC = () => {

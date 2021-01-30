@@ -16,6 +16,8 @@ import {BackgroundChangeAC, setInitialTC, ThemeChangeAC, themType} from "./redux
 import {RootStateType} from "./redux/ReduxStore";
 import {Preloader} from "./common/Preloader";
 import {Settings} from "./components/Settings";
+import News from "./components/News";
+import Music from "./components/Music";
 
 type MapStateType = {
     initial: boolean
@@ -56,12 +58,13 @@ class App extends React.Component <MapStateType & DispatchStateType & OwnProps> 
                 <Navbar/>
                 <div className={`${stule.wrappContent} ${style[this.props.theme +'Body']} ${cl[this.props.bgBody]}`}>
                     <Route path={"/dialogs"} render={() => <DialogsWrap/>}/>
-                    <Route path={"/profile/:userID?"} render={() => <ProfileWrap/>}/>
-                    {/*<Route path= {"/news"} render={() => <News/>} />*/}
-                    {/* <Route path={"/music"} render={() => <Music/>} /> */}
-                    <Route path={"/settings"} render={() => <Settings/>}/>
                     <Route path={"/users"} render={() => <UsersWrap/>}/>
+                    <Route path={"/profile/:userID?"} render={() => <ProfileWrap/>}/>
                     <Route path={"/login"} render={() => <LoginWrap/>}/>
+                    <Route path= {"/news"} render={() => <News/>} />
+                     <Route path={"/music"} render={() => <Music/>} />
+                    <Route path={"/settings"} render={() => <Settings/>}/>
+
                 </div>
                 <Footer/>
             </div>
