@@ -56,7 +56,6 @@ export type DataType = {
 
 export class UsersContainer extends React.Component<propsType> {
     componentDidMount() {
-        //debugger
         this.props.getUsersTC(this.props.currentPage,this.props.pagesSize)
     }
 
@@ -65,7 +64,6 @@ export class UsersContainer extends React.Component<propsType> {
     }
 
     render() {
-        // debugger
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
@@ -95,10 +93,6 @@ let mapStateToProps = (state: RootStateType) => {
     }
 }
 const UsersWrap = connect(mapStateToProps, {
-    // setCurrentPage: setCurrentPageAC,
-    // setTotalUsers: setTotalUsersAC,
-    // toggleIsFetching: isFetchingAC,
-    // toggleFollowingIsProgress: followingIsProgressAC,
     getUsersTC,
     onFollowTC,
     onUnFollowTC,

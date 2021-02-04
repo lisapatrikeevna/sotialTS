@@ -18,10 +18,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             {/*<Field type="text" placeholder={'login'} component={'input'} name={'login'}/>*/}
             <Field type="text" placeholder={'login'} component={renderTextField} name={'email'} id="outlined-multiline-flexible"
                    label='login' variant="outlined"/>
-            {/*<Field type="password" placeholder={'password'} component={'input'} name={'password'}/>*/}
             <Field type='password' placeholder={'password'} component={renderTextField} name={'password'} id="outlined-multiline-flexible"
                    label='password' variant="outlined" className={cl.input} style={{borderColor: 'green'}}/>
-            {/*<Field type="checkbox" placeholder={'remember me'} component={'input'} name={'rememberMe'}/>*/}
             <Field type="checkbox" placeholder={'remember me'} component={renderCheckbox} name={'rememberMe'}/>
             {props.error && <div className={cl.errorForm}>{props.error}</div>}
             <button type={"submit"}>login</button>
@@ -35,8 +33,6 @@ type loginPropsType={
 }
 function Login(props:loginPropsType) {
     const onSubmit = (formData: FormDataType) => {
-         //debugger
-        console.log(formData)
         props.loginTC(formData.email,formData.password,formData.rememberMe)
     }
     if (props.aught) {

@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/ReduxStore";
 import {loginTC} from "../redux/AuthReducer";
-import {photosType} from "./ProfileWrap";
 import Login from "./Login";
 
 type DispatchStateType = {
@@ -17,9 +16,7 @@ type MapStateType = {
 }
 
 class LoginWrap extends React.Component <MapStateType & DispatchStateType> {
-    // componentDidMount() {
-    //
-    // }
+
 
     render() {
         return (

@@ -1,5 +1,6 @@
 import {FollowUserApi, UserApi} from "../common/AsksApi";
 import {Dispatch} from "redux";
+import {mappedObj} from "../expansive/mappedObj";
 
 type UnfollowACType = ReturnType<typeof unfollowAC>
 type FollowACType = ReturnType<typeof followAC>
@@ -8,14 +9,16 @@ type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersACType = ReturnType<typeof setTotalUsersAC>
 type IsFetchingACType = ReturnType<typeof isFetchingAC>
 type follovinIsProgresACType = ReturnType<typeof followingIsProgressAC>
-type UsersActionType = UnfollowACType | FollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersACType |IsFetchingACType|follovinIsProgresACType
+type UsersActionType =  UnfollowACType | FollowACType
+    | SetUsersACType | SetCurrentPageACType | SetTotalUsersACType
+    | IsFetchingACType | follovinIsProgresACType
 export type usersInitialStateType = {
     users: Array<userItemType>
     pagesSize: number
     currentPage: number
     countUsers: number
     isFetching: boolean
-    followingIsProgress:number[]
+    followingIsProgress: number[]
 }
 export type userItemType = {
     name: string
@@ -36,7 +39,7 @@ let initialState: usersInitialStateType = {
     currentPage: 1,
     countUsers: 10,
     isFetching: false,
-    followingIsProgress:[]
+    followingIsProgress: []
 }
 
 const usersReducer = (state: usersInitialStateType = initialState, action: UsersActionType): usersInitialStateType => {
@@ -44,7 +47,10 @@ const usersReducer = (state: usersInitialStateType = initialState, action: Users
         case 'FOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => {
+                //@ts-ignore
+                users:
+                //    mappedObj(state.users,action.userId,'id',{ followed: true})
+                    state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
@@ -75,10 +81,11 @@ const usersReducer = (state: usersInitialStateType = initialState, action: Users
             return {...state, isFetching: action.isFetching}
         }
         case 'FOLOVING-IS-PROGRES': {
-            return {...state,
+            return {
+                ...state,
                 followingIsProgress: action.followingIsProgress
-                    ? [...state.followingIsProgress,action.id]
-                    : state.followingIsProgress.filter(id=> id !==action.id)
+                    ? [...state.followingIsProgress, action.id]
+                    : state.followingIsProgress.filter(id => id !== action.id)
             }
         }
         default  :
@@ -92,45 +99,39 @@ export const unfollowAC = (userId: number) => ({type: 'UNFOLLOW', userId} as con
 export const setUsersAC = (users: Array<userItemType>) => ({type: 'SET-USERS', users: users} as const)
 export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
 export const setTotalUsersAC = (totalCount: number) => ({type: 'SET-TOTAL-COUNT', totalCount} as const)
-export const isFetchingAC = (isFetching:boolean) => ({type: 'TOGGLE-IS-FETHING', isFetching} as const)
-export const followingIsProgressAC = (followingIsProgress:boolean,id:number) => ({type: 'FOLOVING-IS-PROGRES', followingIsProgress,id} as const)
+export const isFetchingAC = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETHING', isFetching} as const)
+export const followingIsProgressAC = (followingIsProgress: boolean, id: number) => ({
+    type: 'FOLOVING-IS-PROGRES', followingIsProgress, id} as const)
 
 //type Dispatch<S> = Redux.Dispatch<S>;
-export const getUsersTC = (currentPage:number,pagesSize:number)=>{
-    // return(dispatch:Dispatch<S>)=>{
-    //import {Dispatch} from "redux";!!!!!!!!!!!!!!!!!!!!!! type Dispatch
-    return(dispatch: Dispatch)=>{
-        dispatch(isFetchingAC(true))
-        dispatch(setCurrentPageAC(currentPage))
-        UserApi.getUsers(currentPage,pagesSize)
-            .then(response => {
-                dispatch(isFetchingAC(false));
-                dispatch(setUsersAC(response.items));
-                dispatch(setTotalUsersAC(response.totalCount));
-            });
+export const getUsersTC = (currentPage: number, pagesSize: number) => async (dispatch: Dispatch) => {
+    dispatch(isFetchingAC(true))
+    dispatch(setCurrentPageAC(currentPage))
+    const response = await UserApi.getUsers(currentPage, pagesSize)
 
-    }
-}
-export const onFollowTC = (id: number) =>{
-    return(dispatch:Dispatch)=>{
-        dispatch(followingIsProgressAC(true,id))
-        FollowUserApi.follow(id)
-            .then(response => {
-                if(response.data.resultCode===0){  dispatch(followAC(id)) }
-                dispatch(followingIsProgressAC(false,id))
-            });
-    }
-}
-export const onUnFollowTC = (id: number) =>{
-    return(dispatch:Dispatch)=>{
-        dispatch(followingIsProgressAC(true,id))
-        FollowUserApi.unfollow(id)
-            .then(response => {
-                if(response.data.resultCode===0){ dispatch(unfollowAC(id)) }
-                dispatch(followingIsProgressAC(false,id))
-            });
-    }
+    dispatch(isFetchingAC(false));
+    dispatch(setUsersAC(response.items));
+    dispatch(setTotalUsersAC(response.totalCount));
 
 }
-// window.state:usersInitialStateType=state:usersInitialStateType;
+
+export const onFollowTC = (id: number) => async (dispatch: Dispatch) => {
+    dispatch(followingIsProgressAC(true, id))
+    const response = await FollowUserApi.follow(id)
+    if (response.data.resultCode === 0) {
+        dispatch(followAC(id))
+    }
+    dispatch(followingIsProgressAC(false, id))
+}
+
+export const onUnFollowTC = (id: number) => async (dispatch: Dispatch) => {
+    dispatch(followingIsProgressAC(true, id))
+    const response = await FollowUserApi.unfollow(id)
+    if (response.data.resultCode === 0) {
+        dispatch(unfollowAC(id))
+    }
+    dispatch(followingIsProgressAC(false, id))
+}
+
+
 export default usersReducer;
