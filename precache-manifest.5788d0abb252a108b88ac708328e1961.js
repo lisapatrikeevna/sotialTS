@@ -1,27 +1,67 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b28a4c228ec21b4bf2487118922ea140",
+    "revision": "5cb3e76089d657aa0f570ababae4c7b3",
     "url": "/sotialTS/index.html"
   },
   {
-    "revision": "04b733b9b9643804778a",
-    "url": "/sotialTS/static/css/main.8f1833dd.chunk.css"
+    "revision": "e7d66401551fe70dcb82",
+    "url": "/sotialTS/static/css/3.f9c21ed6.chunk.css"
   },
   {
-    "revision": "94253fc866e98c862bba",
-    "url": "/sotialTS/static/js/2.7765844a.chunk.js"
+    "revision": "9f7ba9dc8d518049ee48",
+    "url": "/sotialTS/static/css/4.37f200ad.chunk.css"
+  },
+  {
+    "revision": "640cd2a08d8801ecee18",
+    "url": "/sotialTS/static/css/5.64c1746f.chunk.css"
+  },
+  {
+    "revision": "f94237d3316de5b92748",
+    "url": "/sotialTS/static/css/6.2b283795.chunk.css"
+  },
+  {
+    "revision": "4bdf1c539e48d239f985",
+    "url": "/sotialTS/static/css/7.25b44a53.chunk.css"
+  },
+  {
+    "revision": "5e818149b2132d1c192d",
+    "url": "/sotialTS/static/css/main.0de8d457.chunk.css"
+  },
+  {
+    "revision": "2bef2fcef1490d5c91ce",
+    "url": "/sotialTS/static/js/2.58a5ee3e.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/sotialTS/static/js/2.7765844a.chunk.js.LICENSE.txt"
+    "url": "/sotialTS/static/js/2.58a5ee3e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "04b733b9b9643804778a",
-    "url": "/sotialTS/static/js/main.2dfcc5e5.chunk.js"
+    "revision": "e7d66401551fe70dcb82",
+    "url": "/sotialTS/static/js/3.2f5bbdce.chunk.js"
   },
   {
-    "revision": "94a76d3cbe32f94b90f7",
-    "url": "/sotialTS/static/js/runtime-main.34a6b334.js"
+    "revision": "9f7ba9dc8d518049ee48",
+    "url": "/sotialTS/static/js/4.feb720ad.chunk.js"
+  },
+  {
+    "revision": "640cd2a08d8801ecee18",
+    "url": "/sotialTS/static/js/5.157f4e7b.chunk.js"
+  },
+  {
+    "revision": "f94237d3316de5b92748",
+    "url": "/sotialTS/static/js/6.8378e701.chunk.js"
+  },
+  {
+    "revision": "4bdf1c539e48d239f985",
+    "url": "/sotialTS/static/js/7.9677651c.chunk.js"
+  },
+  {
+    "revision": "5e818149b2132d1c192d",
+    "url": "/sotialTS/static/js/main.ec79ad2e.chunk.js"
+  },
+  {
+    "revision": "a82d048372989d71e5fd",
+    "url": "/sotialTS/static/js/runtime-main.370b1d7d.js"
   },
   {
     "revision": "58f7567628ee9e548efa45d9b86df372",
@@ -86,6 +126,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "855d21abe0e22a0a0062dcd5a1342773",
     "url": "/sotialTS/static/media/undraw_experience_design_eq3j.855d21ab.png"
+  },
+  {
+    "revision": "c740d21c46e791a2f8c06c1204b88452",
+    "url": "/sotialTS/static/media/undraw_faq_rjoy.c740d21c.png"
   },
   {
     "revision": "11abe06ac98fa7a7c31110a43d9d0f44",
