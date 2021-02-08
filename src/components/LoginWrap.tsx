@@ -9,10 +9,7 @@ type DispatchStateType = {
 }
 type MapStateType = {
     aught: boolean
-    // avatar: photosType | null
-    // // id: number | null
-    // email: string | null
-    // login: string | null
+    captchaUrl?: string | null
 }
 
 class LoginWrap extends React.Component <MapStateType & DispatchStateType> {
@@ -31,11 +28,8 @@ class LoginWrap extends React.Component <MapStateType & DispatchStateType> {
 
 let mapStateToProps = (state: RootStateType): MapStateType => {
     return {
-        // id: state.auth.id,
-        // email: state.auth.email,
-        // login: state.auth.login,
-        // avatar: state.auth.avatar,
         aught: state.auth.aught,
+        //captchaUrl: state.auth.
     }
 }
 export default connect <MapStateType, DispatchStateType, {}, RootStateType>

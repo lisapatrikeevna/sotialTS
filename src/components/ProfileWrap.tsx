@@ -2,7 +2,13 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/ReduxStore";
-import {getUserProfileTC, getUserStatusTC, updateUserStatusTC} from "../redux/ProfileReducer";
+import {
+    changePhotoTC,
+    getUserProfileTC,
+    getUserStatusTC,
+    saveProfileTC,
+    updateUserStatusTC
+} from "../redux/ProfileReducer";
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {compose} from "redux";
 import {IsLoginRedirect} from '../common/lsLoginHOC';
@@ -12,8 +18,10 @@ export type propsType = {
     getUserProfileTC: (userID: string) => void
     getUserStatusTC: (userID: string) => void
     updateUserStatusTC: (status: string) => void
+    saveProfileTC: (data: any) => void
+    changePhotoTC: (file: any) => void
     status: string
-    authorizedUserID:string
+    authorizedUserID: string
 }
 type TRouteParams = {
     userID: string // since it route params
@@ -42,26 +50,37 @@ export type photosType = {
 }
 
 export class ProfileWrap extends React.Component<propsType & RouteComponentProps<TRouteParams>> {
-    componentDidMount() {
+    refreshProfile() {
         let userID = this.props.match.params.userID;
         if (!userID) {
             userID = this.props.authorizedUserID;
             //userID = '11446';
-            if (!userID){
+            if (!userID) {
                 this.props.history.push('/login');
             }
         }
         this.props.getUserProfileTC(userID);
         this.props.getUserStatusTC(userID);
     }
+    componentDidMount() {
+        this.refreshProfile()
+    }
+    componentDidUpdate(prevProps: Readonly<propsType & RouteComponentProps<TRouteParams>>, prevState: Readonly<{}>, snapshot?: any) {
+        if(this.props.match.params.userID !== prevProps.match.params.userID){
+            this.refreshProfile()
+        }
+    }
 
     render() {
         return (
             <Profile
                 {...this.props}
+                isOwner={!this.props.match.params.userID}
+                changePhoto={this.props.changePhotoTC}
                 profile={this.props.profile}
                 status={this.props.status}
                 updateUserStatusTC={this.props.updateUserStatusTC}
+                saveProfileTC={this.props.saveProfileTC}
             />
         );
     }
@@ -86,7 +105,9 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         getUserProfileTC,
         getUserStatusTC,
-        updateUserStatusTC
+        updateUserStatusTC,
+        changePhotoTC,
+        saveProfileTC,
     }),
     IsLoginRedirect,
     withRouter

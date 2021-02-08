@@ -1,39 +1,34 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React from "react";
+//import { create } from "react-test-renderer";
+import {ProfileStatus} from "./ProfileStatus";
 
-type propsType = {
-    status: string
-    updateStatus: (status: string) => void
-}
+describe("ProfileStatus component", () => {
+    const updateStatus=()=>{}
 
-export const ProfileStatus = (props: propsType) => {
-    let [editMode, setEditMode] = useState(false);
-    let [value, setValue] = useState(props.status);
-    useEffect(()=>{
-        setValue(props.status)
-    },[props.status])
-    
-    const onEditMode = () => {
-        setEditMode(true)
-    }
-    const offEditMode = () => {
-        setEditMode(false)
-        props.updateStatus(value)
-    }
-
-    const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.currentTarget.value);
-    }
-
-    return (
-        <div>
-            {!editMode ?
-                <span onDoubleClick={onEditMode}>
-                    {props.status || 'dont have status'}
-                 </span>  :
-                <input value={value} autoFocus
-                       onChange={onChangeStatus}
-                       onBlur={offEditMode}
-                />
-            }
-        </div>);
-}
+    // test("status from props should bi in the state", () => {
+    //     const component = create(<ProfileStatus status={'some text'} updateStatus={updateStatus}/>);
+    //     const instance = component.getInstance();
+    //     expect(instance.state.status).toBe('some text');
+    // });
+    // test("started with span", () => {
+    //     const component = create(<ProfileStatus status={'some text'} updateStatus={updateStatus}/>);
+    //     const root = component.root;
+    //     let span = root.findByType('span')
+    //     expect(span.innerText).toBe('some text');
+    //     expect(span.length).toBe(1)
+    // });
+    // test("dont have input", () => {
+    //     const component = create(<ProfileStatus status={'some text'} updateStatus={updateStatus}/>);
+    //     const root = component.root;
+    //     expect(()=>{
+    //         let input = root.findByType('input')
+    //     }).toThrow()
+    // });
+    // test("callback should be called", () => {
+    //     const mockCallback = jest.fn()
+    //     const component = create(<ProfileStatus status={'some text'} updateStatus={mockCallback}/>);
+    //     const instance = component.getInstance();
+    //     instance.onChangeStatus();
+    //     expect(mockCallback.mock.calls.length).toBe(1)
+    // });
+});

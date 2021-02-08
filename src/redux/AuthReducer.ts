@@ -47,6 +47,8 @@ const authReducer = (state: InitialStateType = initialState, action: ActionType)
 export const setAuthMyAC = (id: number | null, email: string | null, login: string | null,aught:boolean) => ({
     type: 'SET-AUTH-MY', data: {id, email, login,aught}
 } as const)
+export const getCaptchaUrlSuccessAC = (payload:{captchaUrl:string}) => ({type: 'GET-CAPTCHA-URL-SUCCESS', payload} as const)
+
 const getAvatarAC = (id: number, ava: any,) => ({type: 'SET-AVA', id, ava} as const)
 export const setAuthMyTC = () => {
     return (dispatch: Dispatch) => {

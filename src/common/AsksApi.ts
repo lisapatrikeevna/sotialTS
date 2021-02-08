@@ -1,5 +1,11 @@
 import axios from "axios";
+import {AxiosGetType} from "../components/ProfileWrap";
 
+type MyResType={
+    data:{id:number,email:string,login:string}
+    resultCode:number
+    message:Array<string>
+}
 const instans = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -18,17 +24,14 @@ export const UserApi = {
 }
 export const AuthMyApi = {
     getMy() {
-        return instans.get(`auth/me`)
+        return instans.get<MyResType>(`auth/me`)
             .then(response => {
-                //  debugger
                 return response.data
             })
     },
     login(email: string, password: string, rememberMe=true) {
         return instans.post(`auth/login`, {email, password, rememberMe})
             .then(response => {
-               // debugger
-                console.log(response.data)
                 return response.data
             })
     },
@@ -45,11 +48,9 @@ export const FollowUserApi = {
                 return response.data
             })
     },
-
     unfollow(userId: number) {
         return instans.delete(`follow/${userId}`)
     },
-
     follow(userId: number) {
         return instans.post(`follow/${userId}`)
     },
@@ -58,8 +59,15 @@ export const ProfileUserApi = {
     getUser(userId: number) {
         return instans.get(`profile/${userId}`)
     },
-    updateUserPhoto() {
-        return instans.put(`profile/photo`)
+    updateUserPhoto(file:any) {
+        const formData = new FormData()
+        formData.append('image',file)
+        return instans.put(`profile/photo`,formData, {headers: {
+            'Content-Type': 'multipart/form-data'
+            }})
+    },
+    saveProfile(profile:any) {
+        return instans.put(`profile`,profile)
     },
     updateStatus(status: string) {
         return instans.put(`profile/status`, {status: status})

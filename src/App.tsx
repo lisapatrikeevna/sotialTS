@@ -2,22 +2,24 @@ import React from 'react';
 import stule from './App.module.css';
 import style from './components/TemplateSettings/ThemeChange.module.css';
 import cl from './components/TemplateSettings/BackgroundChange.module.css';
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
 import {Route, withRouter} from 'react-router-dom';
-import DialogsWrap from "./components/DialogsWrap";
-import UsersWrap from "./components/Users/UsersWrap";
-import HeaderWrap from "./components/HeaderWrap";
-import LoginWrap from "./components/LoginWrap";
-import ProfileWrap from "./components/ProfileWrap";
 import {connect} from "react-redux";
 import {compose} from "redux";
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import HeaderWrap from "./components/HeaderWrap";
+import LoginWrap from "./components/LoginWrap";
 import {BackgroundChangeAC, setInitialTC, ThemeChangeAC, themType} from "./redux/AppReducer";
 import {RootStateType} from "./redux/ReduxStore";
 import {Preloader} from "./common/Preloader";
-import {Settings} from "./components/Settings";
-import News from "./components/News";
-import Music from "./components/Music";
+import {Settings} from "./components/Settings"
+
+//const Settings = React.lazy(() => import ("./components/Settings"));
+const News = React.lazy(() => import ( "./components/News"));
+const Music = React.lazy(() => import ( "./components/Music"));
+const DialogsWrap = React.lazy(() => import ("./components/DialogsWrap"));
+const UsersWrap = React.lazy(() => import ( "./components/Users/UsersWrap"));
+const ProfileWrap = React.lazy(() => import ("./components/ProfileWrap"));
 
 type MapStateType = {
     initial: boolean
@@ -55,6 +57,7 @@ class App extends React.Component <MapStateType & DispatchStateType & OwnProps> 
             <div className={stule.appWrapper}>
                 <HeaderWrap/>
                 <Navbar/>
+                <React.Suspense fallback={'...loading'}>
                 <div className={`${stule.wrappContent} ${style[this.props.theme + 'Body']} ${cl[this.props.bgBody]}`}>
                     <Route path={"/dialogs"} render={() => <DialogsWrap/>}/>
                     <Route path={"/users"} render={() => <UsersWrap/>}/>
@@ -65,6 +68,7 @@ class App extends React.Component <MapStateType & DispatchStateType & OwnProps> 
                     <Route path={"/settings"} render={() => <Settings/>}/>
 
                 </div>
+                </React.Suspense>
                 <Footer/>
             </div>
             // </IsAuthContext.Provider>

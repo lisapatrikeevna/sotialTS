@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 
 type propsType = {
     status: string
-    updateStatus: (status: string) => void
+    updateStatus?: (status: string) => void
 }
 
 export const ProfileStatus = (props: propsType) => {
@@ -17,7 +17,9 @@ export const ProfileStatus = (props: propsType) => {
     }
     const offEditMode = () => {
         setEditMode(false)
-        props.updateStatus(value)
+        if(props.updateStatus) {
+            props.updateStatus(value)
+        }
     }
 
     const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
